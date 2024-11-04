@@ -21,7 +21,7 @@
         <div class="mx-20">
             <h3 class="text-lg font-bold mb-4">Quick link</h3>
             <ul>
-                <li><a href="{{route('dashboard')}}" class="hover:underline">Home Page</a></li>
+                <li><a href="/" class="hover:underline">Home Page</a></li>
                 <li><a href="{{route('pages.about')}}" class="hover:underline">Introduction</a></li>
                 <li><a href="#" class="hover:underline">Product</a></li>
                 <li><a href="{{route('pages.blog')}}" class="hover:underline">Blog</a></li>

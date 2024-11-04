@@ -86,7 +86,7 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 // Route cho Dashboard
-Route::get('/dashboard', [WebsiteDashboardController::class, 'index'])->name('dashboard');
+Route::get('/', [WebsiteDashboardController::class, 'index']);
 
 // Routes cho Collections
 Route::controller(CollectionController::class)->prefix('collections')->group(function () {

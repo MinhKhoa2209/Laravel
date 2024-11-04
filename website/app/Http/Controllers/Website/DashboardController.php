@@ -41,7 +41,7 @@ class DashboardController extends Controller
             ],
         ];
 
-        return view('website.layouts.dashboard', compact('featuredProducts', 'lego', 'reviews'));
+        return view('website.layouts.homepage', compact('featuredProducts', 'lego', 'reviews'));
 
     }
 }

@@ -1,7 +1,6 @@
 function addToCart(productId) {
     const quantityInput = document.getElementById(`quantity-${productId}`);
     const quantity = parseInt(quantityInput.value);
-
     if (isNaN(quantity) || quantity < 1) {
         alert("Please enter a valid quantity.", true);
         return;
@@ -33,7 +32,6 @@ function addToCart(productId) {
 function buyNow(productId) {
     const quantityInput = document.getElementById(`quantity-${productId}`);
     const quantity = parseInt(quantityInput.value);
-
     if (isNaN(quantity) || quantity < 1) {
         alert("Please enter a valid quantity.");
         return;
@@ -92,16 +90,10 @@ function removeFromCart(productId) {
 function updateCartQuantity(productId, change) {
     const quantityInput = document.getElementById(`quantity-${productId}`);
     let currentQuantity = parseInt(quantityInput.value);
-    const maxQuantity = parseInt(quantityInput.dataset.maxQuantity);
     const newQuantity = currentQuantity + change;
 
     if (newQuantity < 1) {
         quantityInput.value = 1;
-        return;
-    }
-
-    if (newQuantity > maxQuantity) {
-        alert("Requested quantity exceeds available stock.");
         return;
     }
 
@@ -120,12 +112,13 @@ function updateCartQuantity(productId, change) {
             updateCartDisplay(data.cart, data.totalAmount, data.productId, data.subAmount);
         } else {
             alert(data.message);
+            quantityInput.value = currentQuantity;
         }
     })
     .catch(error => console.error('Error:', error));
 }
-
 function updateCartDisplay(cart, totalAmount, productId, subAmount) {
+
     const productSubtotalElement = document.getElementById(`subtotal-${productId}`);
     if (productSubtotalElement) {
         productSubtotalElement.textContent = subAmount.toLocaleString('vi-VN') + ' VND';

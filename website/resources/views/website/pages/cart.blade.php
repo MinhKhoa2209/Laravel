@@ -42,7 +42,7 @@
 
                                     <div class="flex items-center border border-gray-300 rounded-md overflow-hidden">
                                         <button type="button" class="bg-white text-lg px-4 py-2" onclick="updateCartQuantity({{ $item->product_id }}, -1);">−</button>
-                                        <input type="number" id="quantity-{{ $item->product_id }}" name="quantity" min="1" value="{{ $item->quantity }}"
+                                        <input type="number" id="quantity-{{ $item->product_id }}"  name="quantity" min="1" value="{{ $item->quantity }}"
                                                class="w-12 text-center border-0 focus:ring-blue-500 focus:border-blue-500" readonly>
                                         <button type="button" class="bg-white text-lg px-4 py-2" onclick="updateCartQuantity({{ $item->product_id }}, 1);">+</button>
                                     </div>

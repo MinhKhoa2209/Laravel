@@ -82,7 +82,7 @@
                         @endforeach
                     </div>
                     <div id="no-product-message" class="text-red-500 font-bold hidden text-center my-4 flex-grow">
-                        There are no products in this price range.
+                       No products found.
                     </div>
                 </div>
             </section>

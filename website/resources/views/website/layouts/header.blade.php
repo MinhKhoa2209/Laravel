@@ -14,7 +14,7 @@
 
         <!-- Navigation -->
         <nav class="hidden lg:flex space-x-4 justify-center flex-grow flex-nowrap">
-            <a href="{{route('dashboard')}}" class="text-gray-700 hover:text-black text-lg hover:underline">Home Page</a>
+            <a href="/" class="text-gray-700 hover:text-black text-lg hover:underline">Home Page</a>
             <a href="{{ route('pages.about') }}" class="text-gray-700 hover:text-black text-lg hover:underline">Introduction</a>
             <div class="relative group">
                 <a href="{{route('collections.all-products')}}" class="text-gray-700 hover:text-black text-lg hover:underline">Product</a>
@@ -85,7 +85,7 @@
     <nav id="mobile-nav" class="lg:hidden hidden bg-white shadow-md z-50">
         <div class="container mx-auto px-4 py-2">
             <div id="main-menu" class="flex flex-col space-y-2 mt-2">
-                <a href="{{ route('dashboard') }}" class="text-gray-700 hover:text-black">Home Page</a>
+                <a href="#" class="text-gray-700 hover:text-black">Home Page</a>
                 <a href="{{ route('pages.about') }}" class="text-gray-700 hover:text-black">Introduction</a>
 
                 <a href="{{ route('collections.all-products') }}" class="text-gray-700 hover:text-black">All Products</a>
