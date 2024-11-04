@@ -93,7 +93,7 @@
                 </div>
 
                 <div class="flex space-x-4">
-                    <a href="{{ route('dashboard') }}" class="w-full bg-gray-200 text-black p-3 rounded-lg text-center hover:bg-gray-300">Back to Dashboard</a>
+                    <a href="{{ route('homepage') }}" class="w-full bg-gray-200 text-black p-3 rounded-lg text-center hover:bg-gray-300">Back to Dashboard</a>
                 </div>
             </div>
         </section>

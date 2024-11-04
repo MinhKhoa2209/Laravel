@@ -86,17 +86,12 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 // Route cho Dashboard
-Route::get('/', [WebsiteDashboardController::class, 'index']);
+Route::get('/', [WebsiteDashboardController::class, 'index'])->name('homepage');
 
 // Routes cho Collections
 Route::controller(CollectionController::class)->prefix('collections')->group(function () {
-    Route::get('all-products','showAllProduct')->name('collections.all-products');
-    Route::get('souvenir', 'showSouvenir')->name('collections.souvenir');
-    Route::get('shoes', 'showShoes')->name('collections.shoes');
-    Route::get('lego', 'showLego')->name('collections.lego');
-    Route::get('pitcher', 'showPitcher')->name('collections.pitcher');
-    Route::get('fall-winter-clothes', 'showFallWinterClothes')->name('collections.fall-winter-clothes');
-    Route::get('spring-summer-clothes', 'showSpringSummerClothes')->name('collections.spring-summer-clothes');
+    Route::get('all-products', 'showAllProduct')->name('collections.all-products');
+    Route::get('/{categoryName}', 'showCategory')->name('collections.category');
 });
 
 // Routes cho Pages

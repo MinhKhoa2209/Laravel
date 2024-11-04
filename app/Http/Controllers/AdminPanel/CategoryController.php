@@ -4,6 +4,7 @@ namespace App\Http\Controllers\AdminPanel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -60,12 +61,24 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
 
-        $category->update($request->all());
+        $category->name = $request->name;
+
+        if ($request->hasFile('image')) {
+            if ($category->image && Storage::disk('public')->exists($category->image)) {
+                Storage::disk('public')->delete($category->image);
+            }
+
+            $fileName = $request->file('image')->getClientOriginalName();
+            $path = 'categories/' . $fileName;
+            Storage::disk('public')->put($path, file_get_contents($request->file('image')));
+
+            $category->image = $path;
+        }
+
+        $category->save();
 
         return redirect()->route('categories')->with('success', 'Category updated successfully');
-
     }
-
     /**
      * Remove the specified resource from storage.
      */

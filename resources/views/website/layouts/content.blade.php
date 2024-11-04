@@ -15,66 +15,17 @@
         <div class="container mx-auto text-center">
             <h2 class="text-3xl font-bold mb-12">MIXI BRAND</h2>
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
-                <!-- Category Item -->
-                <div class="group">
-                    <div class="w-full aspect-square rounded-full bg-gray-100 overflow-hidden transform transition-transform duration-300 group-hover:scale-110">
-                        <a href="{{ route('collections.spring-summer-clothes') }}">
-                            <img src="{{ asset('admin_assets/img/spring_clothes/spring.svg') }}" alt="Spring & Summer" class="w-full h-auto object-cover">
-                        </a>
+                @foreach ($categories as $category)
+                    <div class="group">
+                        <div class="w-full aspect-square rounded-full bg-gray-100 overflow-hidden transform transition-transform duration-300 group-hover:scale-110">
+                            <a href="{{ route('collections.category', ['categoryName' => str_replace(' ', '-', $category->name)]) }}">
+                                <img src="{{ Storage::url($category->image) }}" alt="{{ $category->name }}" class="w-full h-auto object-cover">
+                            </a>
+                        </div>
+                        <h3 class="text-lg font-semibold mt-4">{{ $category->name }}</h3>
+                        <p class="text-gray-500">{{ $category->products_count }} products</p>
                     </div>
-                    <h3 class="text-lg font-semibold mt-4">Spring & Summer</h3>
-                    <p class="text-gray-500">8 products</p>
-                </div>
-
-                <div class="group">
-                    <div class="w-full aspect-square rounded-full bg-gray-100 overflow-hidden transform transition-transform duration-300 group-hover:scale-110">
-                        <a href="{{route('collections.fall-winter-clothes')}}">
-                        <img src="{{ asset('admin_assets/img/winter_clothes/winter.svg') }}" alt="Fall & Winter" class="w-full h-auto object-cover">
-                        </a>
-                    </div>
-                    <h3 class="text-lg font-semibold mt-4">Fall & Winter</h3>
-                    <p class="text-gray-500">4 products</p>
-                </div>
-
-                <div class="group">
-                    <div class="w-full aspect-square rounded-full bg-gray-100 overflow-hidden transform transition-transform duration-300 group-hover:scale-110">
-                        <a href="{{route('collections.pitcher')}}">
-                        <img src="{{ asset('admin_assets/img/pitcher/cup.svg') }}" alt="Cup" class="w-full h-auto object-cover">
-                        </a>
-                    </div>
-                    <h3 class="text-lg font-semibold mt-4">Cup</h3>
-                    <p class="text-gray-500">3 products</p>
-                </div>
-
-                <div class="group">
-                    <div class="w-full aspect-square rounded-full bg-gray-100 overflow-hidden transform transition-transform duration-300 group-hover:scale-110">
-                        <a href="{{route('collections.lego')}}">
-                        <img src="{{ asset('admin_assets/img/lego/lego.svg') }}" alt="Lego" class="w-full h-auto object-cover">
-                        </a>
-                    </div>
-                    <h3 class="text-lg font-semibold mt-4">Lego</h3>
-                    <p class="text-gray-500">9 products</p>
-                </div>
-
-                <div class="group">
-                    <div class="w-full aspect-square rounded-full bg-gray-100 overflow-hidden transform transition-transform duration-300 group-hover:scale-110">
-                        <a href="{{route('collections.shoes')}}">
-                        <img src="{{ asset('admin_assets/img/shoes/shoes.svg') }}" alt="Shoes" class="w-full h-auto object-cover">
-                        </a>
-                    </div>
-                    <h3 class="text-lg font-semibold mt-4">Shoes</h3>
-                    <p class="text-gray-500">1 product</p>
-                </div>
-
-                <div class="group">
-                    <div class="w-full aspect-square rounded-full bg-gray-100 overflow-hidden transform transition-transform duration-300 group-hover:scale-110">
-                        <a href="{{route('collections.souvenir')}}">
-                        <img src="{{ asset('admin_assets/img/souvenir/souvenir.svg') }}" alt="Souvenir" class="w-full h-auto object-cover">
-                        </a>
-                    </div>
-                    <h3 class="text-lg font-semibold mt-4">Souvenir</h3>
-                    <p class="text-gray-500">1 product</p>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>

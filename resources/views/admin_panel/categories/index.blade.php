@@ -15,6 +15,7 @@
             <tr>
                 <th>Category ID</th>
                 <th>Name</th>
+                <th>Image</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -24,6 +25,10 @@
                     <tr>
                         <td class="align-middle">{{ $rs->id }} </td>
                         <td class="align-middle">{{ $rs->name }}</td>
+                        <td class="align-middle">
+                            <img src="{{ Storage::url($rs->image) }}" alt="{{ $rs->name }}"
+                                style="width: 50px; height: auto;">
+                        </td>
                         <td class="align-middle">
                             <div class="btn-group d-flex" role="group" aria-label="Basic example" style="max-width: 250px;">
                                 <a href="{{ route('categories.show', $rs->id) }}" class="btn btn-secondary">Detail</a>

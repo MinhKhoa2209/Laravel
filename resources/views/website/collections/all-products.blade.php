@@ -60,6 +60,16 @@
 
                 <!-- Right Content (Product List) -->
                 <div class="w-full lg:w-3/4 px-14 min-h-[360px] flex-grow-0 flex flex-col">
+
+                    <div id="no-product-message" class="text-red-500 font-bold text-center my-4 mx-auto hidden">
+                        No products found.
+                    </div>
+                    
+                    @if($all_products->isEmpty())
+                    <div class="text-red-500 font-bold text-center my-4 flex-grow">
+                        No products found.
+                    </div>
+                @else
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 flex-grow">
                         @foreach($all_products as $product)
                         <a href="{{ route('products.detail', $product->id) }}" class="block product" data-price="{{ $product->price }}">
@@ -81,12 +91,10 @@
                         </a>
                         @endforeach
                     </div>
-                    <div id="no-product-message" class="text-red-500 font-bold hidden text-center my-4 flex-grow">
-                       No products found.
-                    </div>
-                </div>
-            </section>
-        </main>
+                @endif
+            </div>
+        </section>
+    </main>
 
         <!-- Footer -->
         <footer>

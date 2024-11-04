@@ -17,14 +17,17 @@
             <a href="/" class="text-gray-700 hover:text-black text-lg hover:underline">Home Page</a>
             <a href="{{ route('pages.about') }}" class="text-gray-700 hover:text-black text-lg hover:underline">Introduction</a>
             <div class="relative group">
-                <a href="{{route('collections.all-products')}}" class="text-gray-700 hover:text-black text-lg hover:underline">Product</a>
+                <a href="{{route('collections.all-products')}}" class="text-gray-700 hover:text-black text-lg hover:underline">Product
+                    <i class="fas fa-chevron-down ml-1"></i>
+                </a>
                 <div class="absolute left-0 hidden group-hover:block bg-white mt-0 shadow-lg rounded transition-all duration-200 z-30 min-w-[220px]">
-                    <a href="{{ route('collections.spring-summer-clothes') }}" class="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100">Spring summer clothes</a>
-                    <a href="{{ route('collections.fall-winter-clothes') }}" class="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100">Fall winter clothes</a>
-                    <a href="{{ route('collections.pitcher') }}" class="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100">Pitcher</a>
-                    <a href="{{ route('collections.lego') }}" class="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100">Lego</a>
-                    <a href="{{ route('collections.shoes') }}" class="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100">Shoes</a>
-                    <a href="{{ route('collections.souvenir') }}" class="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100">Souvenir</a>
+                    <a href="{{ route('collections.category', 'Spring_summer_clothes') }}" class="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100">Spring Summer Clothes</a>
+                    <a href="{{ route('collections.category', 'Fall_winter_clothes') }}" class="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100">Fall Winter Clothes</a>
+                    <a href="{{ route('collections.category', 'Pitcher') }}" class="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100">Pitcher</a>
+                    <a href="{{ route('collections.category', 'Lego') }}" class="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100">Lego</a>
+                    <a href="{{ route('collections.category', 'Shoes') }}" class="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100">Shoes</a>
+                    <a href="{{ route('collections.category', 'Souvenir') }}" class="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100">Souvenir</a>
+
                 </div>
             </div>
             <a href="{{ route('pages.blog') }}" class="text-gray-700 hover:text-black text-lg hover:underline">Blog</a>
@@ -37,7 +40,7 @@
             <!-- Search Icon -->
             <div class="relative flex-grow hidden lg:flex">
                 <form method="GET" action="{{ route('products.search') }}" class="flex items-center w-full">
-                    <input type="text" name="query" placeholder="Search for product" class="border border-gray-300 rounded-lg pl-10 pr-4 py-2 w-full focus:outline-none focus:ring focus:ring-blue-400">
+                    <input type="text" name="query" placeholder="Search for product" class="border border-gray-300 rounded-lg pl-10 pr-4 py-2 w-full focus:outline-none focus:ring focus:ring-blue-400" required>
                     <button type="submit" class="absolute left-3 top-1/2 transform -translate-y-1/2 bg-transparent border-none cursor-pointer">
                         <i class="fas fa-search text-gray-600"></i>
                     </button>
@@ -85,7 +88,7 @@
     <nav id="mobile-nav" class="lg:hidden hidden bg-white shadow-md z-50">
         <div class="container mx-auto px-4 py-2">
             <div id="main-menu" class="flex flex-col space-y-2 mt-2">
-                <a href="#" class="text-gray-700 hover:text-black">Home Page</a>
+                <a href="/" class="text-gray-700 hover:text-black">Home Page</a>
                 <a href="{{ route('pages.about') }}" class="text-gray-700 hover:text-black">Introduction</a>
 
                 <a href="{{ route('collections.all-products') }}" class="text-gray-700 hover:text-black">All Products</a>
@@ -103,14 +106,13 @@
                 <div class="flex items-center cursor-pointer text-gray-700 hover:text-black" onclick="showMainMenu()">
                     <i class="fas fa-chevron-left mr-2"></i>
                 </div>
-                <a href="{{ route('collections.spring-summer-clothes') }}" class="text-gray-700 hover:text-black block">Spring summer clothes</a>
-                <a href="{{ route('collections.fall-winter-clothes') }}" class="text-gray-700 hover:text-black block">Fall winter clothes</a>
-                <a href="{{ route('collections.pitcher') }}" class="text-gray-700 hover:text-black block">Pitcher</a>
-                <a href="{{ route('collections.lego') }}" class="text-gray-700 hover:text-black block">Lego</a>
-                <a href="{{ route('collections.shoes') }}" class="text-gray-700 hover:text-black block">Shoes</a>
-                <a href="{{ route('collections.souvenir') }}" class="text-gray-700 hover:text-black block">Souvenir</a>
+                <a href="{{ route('collections.category', 'Spring_summer_clothes') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 text-base">Spring Summer Clothes</a>
+                <a href="{{ route('collections.category', 'Fall_winter_clothes') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 text-base">Fall Winter Clothes</a>
+                <a href="{{ route('collections.category', 'Pitcher') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 text-base">Pitcher</a>
+                <a href="{{ route('collections.category', 'Lego') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 text-base">Lego</a>
+                <a href="{{ route('collections.category', 'Shoes') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 text-base">Shoes</a>
+                <a href="{{ route('collections.category', 'Souvenir') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 text-base">Souvenir</a>
             </div>
-
         </div>
     </nav>
 

@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Website;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
 
 
@@ -11,9 +12,13 @@ class DashboardController extends Controller
         $featuredProducts = Product::whereHas('category', function($query) {
             $query->where('name', 'Spring summer clothes');
         })->take(8)->get();
+
         $lego = Product::whereHas('category', function($query) {
             $query->where('name', 'Lego');
         })->take(4)->get();
+
+        $categories = Category::withCount('products')->get();
+
         $reviews = [
             (object)[
                 'author' => 'Nguyễn Văn A',
@@ -41,7 +46,7 @@ class DashboardController extends Controller
             ],
         ];
 
-        return view('website.layouts.homepage', compact('featuredProducts', 'lego', 'reviews'));
+        return view('website.layouts.homepage', compact('featuredProducts', 'lego', 'reviews' ,'categories'));
 
     }
 }

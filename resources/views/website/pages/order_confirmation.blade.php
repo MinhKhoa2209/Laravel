@@ -19,7 +19,7 @@
                 <a href="{{ route('orders.order_detail', ['orderId' => $order->id]) }}" class="bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 flex items-center justify-center">
                     View Order Details
                 </a>
-                <a href="{{ route('dashboard') }}" class="bg-gray-200 text-black p-3 rounded-lg hover:bg-gray-300 flex items-center justify-center">
+                <a href="{{ route('homepage') }}" class="bg-gray-200 text-black p-3 rounded-lg hover:bg-gray-300 flex items-center justify-center">
                     Back to Dashboard
                 </a>
             </div>

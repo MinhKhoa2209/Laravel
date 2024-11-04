@@ -38,7 +38,7 @@ class AuthController extends BaseController
             'level' => 'User'
         ]);
         Auth::attempt($request->only('email', 'password'));
-        return redirect()->route('dashboard')->with('success', 'Registration successful. Welcome to the dashboard.');
+        return redirect()->route('homepage')->with('success', 'Registration successful. Welcome to the dashboard.');
     }
 
         public function login() {
@@ -62,7 +62,7 @@ class AuthController extends BaseController
             ]);
         }
         $request->session()->regenerate();
-        return redirect()->route('dashboard')->with('success', 'Login successful. Welcome to the dashboard.');
+        return redirect()->route('homepage')->with('success', 'Login successful. Welcome to the dashboard.');
     }
 
         public function logout(Request $request)
