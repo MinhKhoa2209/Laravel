@@ -1,11 +1,6 @@
 function addToCart(productId) {
     const quantityInput = document.getElementById(`quantity-${productId}`);
     const quantity = parseInt(quantityInput.value);
-    if (isNaN(quantity) || quantity < 1) {
-        alert("Please enter a valid quantity.", true);
-        return;
-    }
-
     fetch(`/pages/cart/add/${productId}`, {
         method: 'POST',
         headers: {
@@ -76,7 +71,7 @@ function removeFromCart(productId) {
                 cartItem.remove();
             }
             updateCartDisplay(data.cart, data.totalAmount);
-            alert(data.message);
+           
         } else {
             alert(data.message, true);
         }
@@ -90,13 +85,16 @@ function removeFromCart(productId) {
 function updateCartQuantity(productId, change) {
     const quantityInput = document.getElementById(`quantity-${productId}`);
     let currentQuantity = parseInt(quantityInput.value);
-    const newQuantity = currentQuantity + change;
-
+    const maxQuantity = parseInt(quantityInput.getAttribute('data-max-quantity'));
+    let newQuantity = currentQuantity + change;
     if (newQuantity < 1) {
-        quantityInput.value = 1;
+        newQuantity = 1;
         return;
     }
-
+    else if (newQuantity > maxQuantity) {
+    newQuantity = maxQuantity;
+    alert("Requested quantity exceeds available stock.");
+    }
     quantityInput.value = newQuantity;
     fetch(`/pages/cart/update/${productId}`, {
         method: 'PUT',
@@ -112,11 +110,28 @@ function updateCartQuantity(productId, change) {
             updateCartDisplay(data.cart, data.totalAmount, data.productId, data.subAmount);
         } else {
             alert(data.message);
-            quantityInput.value = currentQuantity;
         }
     })
     .catch(error => console.error('Error:', error));
 }
+
+function updateProductQuantity(productId, change) {
+    const quantityInput = document.getElementById(`quantity-${productId}`);
+    let currentQuantity = parseInt(quantityInput.value);
+    const maxQuantity = parseInt(quantityInput.getAttribute('data-max-quantity'));
+    let newQuantity = currentQuantity + change;
+
+    if (newQuantity < 1) {
+        newQuantity = 1;
+    } else if (newQuantity > maxQuantity) {
+        newQuantity = maxQuantity;
+        alert("Requested quantity exceeds available stock.");
+    }
+    quantityInput.value = newQuantity;
+    console.log('Updated quantity:', newQuantity);
+}
+
+
 function updateCartDisplay(cart, totalAmount, productId, subAmount) {
 
     const productSubtotalElement = document.getElementById(`subtotal-${productId}`);
@@ -173,7 +188,7 @@ function filterProducts() {
 
 window.buyNow = buyNow;
 window.filterProducts = filterProducts;
-window.filterProducts = filterProducts;
+window.updateProductQuantity = updateProductQuantity;
 window.addToCart = addToCart;
 window.removeFromCart = removeFromCart;
 window.updateCartQuantity = updateCartQuantity;

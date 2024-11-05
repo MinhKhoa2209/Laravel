@@ -38,7 +38,7 @@ class OrderController extends Controller
         $oldStatus = $order->status;
         $order->update($request->only('status'));
 
-        if ($request->status === 'pending' && $oldStatus !== 'pending') {
+        if ($request->status === 'shipped' && $oldStatus === 'pending') {
             foreach ($order->orderItems as $item) {
                 $item->product->decrement('quantity', $item->quantity);
             }

@@ -25,7 +25,7 @@
                 <div class="lg:col-span-8">
                     <div id="cart-container">
                         @if($cartItems->isEmpty())
-                            <p class="text-center text-gray-500">Your cart is empty.</p>
+                            <p  class="text-center text-gray-500 ">Your cart is empty.</p>
                         @else
                             @foreach($cartItems as $item)
                                 <div id="cart-item-{{ $item->product_id }}" class="flex items-center border-b border-gray-300 py-6 cart-item">
@@ -43,7 +43,7 @@
                                     <div class="flex items-center border border-gray-300 rounded-md overflow-hidden">
                                         <button type="button" class="bg-white text-lg px-4 py-2" onclick="updateCartQuantity({{ $item->product_id }}, -1);">−</button>
                                         <input type="number" id="quantity-{{ $item->product_id }}"  name="quantity" min="1" value="{{ $item->quantity }}"
-                                               class="w-12 text-center border-0 focus:ring-blue-500 focus:border-blue-500" readonly>
+                                               class="w-12 text-center border-0 focus:ring-blue-500 focus:border-blue-500" data-max-quantity="{{ $item->product->quantity }}" readonly>
                                         <button type="button" class="bg-white text-lg px-4 py-2" onclick="updateCartQuantity({{ $item->product_id }}, 1);">+</button>
                                     </div>
                                 </div>

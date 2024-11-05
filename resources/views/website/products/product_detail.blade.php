@@ -37,12 +37,11 @@
                 </div>
 
                 @if($product->quantity > 0)
-                <!-- Quantity Selection and Add to Cart Button -->
                 <div class="mt-6 flex items-center space-x-4 w-full">
                     <div class="flex items-center mx-auto w-auto border border-gray-300 rounded-md overflow-hidden">
-                        <button onclick="updateCartQuantity({{ $product->id }}, -1)" class="bg-white text-lg px-4 py-2">−</button>
+                        <button onclick="updateProductQuantity({{ $product->id }}, -1)" class="bg-white text-lg px-4 py-2">−</button>
                         <input type="number" id="quantity-{{ $product->id }}" name="quantity" min="1" value="1" class="w-12 text-center border-0 focus:ring-blue-500 focus:border-blue-500" data-max-quantity="{{ $product->quantity }}" readonly>
-                        <button onclick="updateCartQuantity({{ $product->id }}, 1)" class="bg-white text-lg px-4 py-2">+</button>
+                        <button onclick="updateProductQuantity({{ $product->id }}, 1)" class="bg-white text-lg px-4 py-2">+</button>
                     </div>
                     <button class="text-blue-500 border border-blue-500 px-8 py-2 rounded-lg hover:bg-blue-50 transition flex-grow" onclick="addToCart({{ $product->id }})">
                         ADD TO CART

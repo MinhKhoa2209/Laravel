@@ -113,7 +113,6 @@ class PageController extends Controller
         $userId = auth()->check() ? auth()->id() : 0;
         $cartItems = Cart::where('user_id', $userId)->with('product')->get();
         $totalPrice = $cartItems->sum('sub_amount');
-
         if ($request->wantsJson()) {
             return response()->json(['cart' => $cartItems, 'totalPrice' => $totalPrice]);
         }
@@ -125,17 +124,8 @@ class PageController extends Controller
    public function addToCart(Request $request, $productId)
    {
        $userId = auth()->check() ? auth()->id() : 0;
-
        $product = Product::findOrFail($productId);
-       if ($product->quantity < 1) {
-           return response()->json(['success' => false, 'message' => 'Product is out of stock!'], 400);
-       }
-
        $quantity = $request->input('quantity');
-       if (!is_numeric($quantity) || $quantity < 1) {
-           return response()->json(['success' => false, 'message' => 'Invalid quantity.'], 400);
-       }
-
        $cartItem = Cart::firstOrCreate(
            ['user_id' => $userId, 'product_id' => $productId],
            ['quantity' => 0, 'sub_amount' => 0]
@@ -178,15 +168,9 @@ class PageController extends Controller
     }
     public function updateCartQuantity(Request $request, $productId)
     {
-        $product = Product::findOrFail($productId);
         $userId = auth()->check() ? auth()->id() : 0;
         $quantity = $request->input('quantity');
         $cartItem = Cart::where('user_id', $userId)->where('product_id', $productId)->firstOrFail();
-
-        if ($quantity > $product->quantity) {
-            return response()->json(['success' => false, 'message' => 'Requested quantity exceeds available stock.']);
-        }
-
         $cartItem->quantity = $quantity;
         $cartItem->sub_amount = $quantity * $cartItem->product->price;
         $cartItem->save();
