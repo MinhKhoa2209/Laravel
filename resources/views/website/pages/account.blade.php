@@ -15,58 +15,20 @@
 <body class="bg-gray-100">
     <!-- Page Wrapper -->
     <div class="min-h-screen flex flex-col justify-between">
-
         <header>
             @include('website.layouts.header')
         </header>
-        <main class="flex-grow flex items-start pt-24 bg-white">
-            <section class="intro py-8 mx-auto max-w-5xl flex flex-col md:flex-row w-full">
-                <!-- Left Content -->
-                <div class="md:w-1/4 mx-8 mt-6 mb-8 md:mb-0">
-                    <h2 class="text-2xl font-bold mb-4">Account site</h2>
-                    <h3 class="text-lg mb-4">Hello, <strong>{{ $user->name }}</strong>!</h3>
-                    <p class="text-lg mb-4">Account information</p>
-                    <p class="text-lg mb-4">Address (1)</p>
-                    <a href="{{ route('logout') }}" class="text-lg font-semibold text-blue-600 underline"
-                       onclick="event.preventDefault(); document.getElementById('logout-form').submit()">Log out</a>
-                </div>
 
-                <!-- Right Content -->
-                <div class="md:w-3/4 p-6 border border-gray-200 rounded-lg shadow">
-                    <h2 class="text-2xl font-bold mb-4">Account</h2>
-                    <p class="mb-4"><strong>Account name: </strong>{{ $user->name }}</p>
-                    <p class="mb-4"><i class="fas fa-home"></i> <strong>Address: </strong>{{ $user->address }}</p>
-                    <p class="mb-4"><i class="fas fa-phone-alt"></i> <strong>Phone number: </strong>{{ $user->phone }}</p>
-                    <h3 class="text-xl font-bold mt-6 mb-4">Your order</h3>
-                    <table class="w-full text-left border-collapse border border-gray-300">
-                        <thead>
-                            <tr>
-                                <th class="border border-gray-300 px-4 py-2 whitespace-nowrap">Order ID</th>
-                                <th class="border border-gray-300 px-4 py-2 whitespace-nowrap">Total amount</th>
-                                <th class="border border-gray-300 px-4 py-2 whitespace-nowrap">Order status</th>
-                                <th class="border border-gray-300 px-4 py-2 whitespace-nowrap">Check time</th>
-                                <th class="border border-gray-300 px-4 py-2 whitespace-nowrap">Check date</th>
-                                <th class="border border-gray-300 px-4 py-2 whitespace-nowrap">Order note</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse ($orders as $order)
-                                <tr>
-                                    <td class="border border-gray-300 px-4 py-2">{{ $order->id }}</td>
-                                    <td class="border border-gray-300 px-4 py-2">{{ $order->total_amount }}</td>
-                                    <td class="border border-gray-300 px-4 py-2">{{ $order->status }}</td>
-                                    <td class="border border-gray-300 px-4 py-2">{{ $order->check_time ??'null'}}</td>
-                                    <td class="border border-gray-300 px-4 py-2">{{ $order->check_date ?? 'null'}}</td>
-                                    <td class="border border-gray-300 px-4 py-2">{{ $order->order_note ??'null'}}</td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="6" class="text-center py-4">Order is not found.</td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
+        <main class="flex-grow flex items-center justify-center pt-36 pb-20 bg-white">
+            <!-- Single Content Section -->
+            <section class="bg-white border border-gray-400 p-8 rounded-lg shadow-md max-w-md w-full text-center">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800">Account Information</h2>
+                <p class="text-lg mb-4">Hello, <strong>{{ $user->name }}</strong>!</p>
+                <p class="text-md mb-4 text-gray-600"><strong>Account name: </strong>{{ $user->name }}</p>
+                <p class="text-md mb-4 text-gray-600"><i class="fas fa-home text-gray-500 mr-2"></i><strong>Address: </strong>{{ $user->address }}</p>
+                <p class="text-md mb-4 text-gray-600"><i class="fas fa-phone-alt text-gray-500 mr-2"></i><strong>Phone number: </strong>{{ $user->phone }}</p>
+                <a href="{{ route('logout') }}" class="text-md font-semibold text-blue-600 underline mt-4 inline-block"
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit()">Log out</a>
             </section>
         </main>
 
@@ -74,7 +36,6 @@
         <footer>
             @include('website.layouts.footer')
         </footer>
-
     </div>
 
 </body>

@@ -47,11 +47,14 @@ class PageController extends Controller
     public function account()
     {
         $user = auth()->user();
-        $userId = auth()->id();
-        $orders = Order::where('user_id', $userId)->get();
-        return view('website.pages.account', compact('user', 'orders'));
+        return view('website.pages.account', compact('user'));
     }
 
+    public function checkOrder() {
+        $user = auth()->user();
+        $orders = Order::where('user_id', $user->id)->get();
+        return view('website.pages.order_tracking',compact('orders'));
+    }
 
     public function wishlist()
     {

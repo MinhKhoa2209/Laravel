@@ -26,7 +26,7 @@
                 <li><a href="#" class="hover:underline">Product</a></li>
                 <li><a href="{{route('pages.blog')}}" class="hover:underline">Blog</a></li>
                 <li><a href="{{route('pages.contact')}}" class="hover:underline">Contact</a></li>
-                <li><a href="{{route('pages.order-tracking')}}" class="hover:underline">Check Order</a></li>
+                <li><a href="{{route('pages.checkOrder')}}" class="hover:underline">Check Order</a></li>
             </ul>
         </div>
 

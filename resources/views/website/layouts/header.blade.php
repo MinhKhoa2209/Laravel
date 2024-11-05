@@ -32,7 +32,7 @@
             </div>
             <a href="{{ route('pages.blog') }}" class="text-gray-700 hover:text-black text-lg hover:underline">Blog</a>
             <a href="{{ route('pages.contact') }}" class="text-gray-700 hover:text-black text-lg hover:underline">Contact</a>
-            <a href="{{ route('pages.order-tracking') }}" class="text-gray-700 hover:text-black text-lg hover:underline">Check Order</a>
+            <a href="{{ route('pages.checkOrder') }}" class="text-gray-700 hover:text-black text-lg hover:underline">Check Order</a>
         </nav>
 
         <!-- Icons -->
@@ -99,7 +99,7 @@
 
                 <a href="{{ route('pages.blog') }}" class="text-gray-700 hover:text-black">Blog</a>
                 <a href="{{ route('pages.contact') }}" class="text-gray-700 hover:text-black">Contact</a>
-                <a href="{{ route('pages.order-tracking') }}" class="text-gray-700 hover:text-black">Check Order</a>
+                <a href="{{ route('pages.checkOrder') }}" class="text-gray-700 hover:text-black">Check Order</a>
             </div>
 
             <div id="product-categories" class="hidden space-y-2 mt-2">

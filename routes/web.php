@@ -99,8 +99,8 @@ Route::controller(PageController::class)->prefix('pages')->group(function () {
     Route::get('about', 'about')->name('pages.about');
     Route::get('blog', 'blog')->name('pages.blog');
     Route::get('contact', 'contact')->name('pages.contact');
-    Route::get('order-tracking', 'orderTracking')->name('pages.order-tracking');
     Route::get('cart', 'cart')->name('pages.cart');
+    Route::get('order-tracking', 'checkOrder')->name('pages.checkOrder');
     Route::post('cart/add/{productId}', 'addToCart')->name('cart.add');
     Route::delete('cart/remove/{productId}', 'removeFromCart')->name('cart.remove');
     Route::put('cart/update/{productId}', 'updateCartQuantity')->name('cart.update');
