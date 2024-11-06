@@ -112,6 +112,7 @@ Route::controller(PageController::class)->prefix('pages')->group(function () {
     Route::get('wishlist', 'wishlist')->name('pages.wishlist');
     Route::post('wishlist/add/{productId}', 'addToWishlist')->name('wishlist.add');
     Route::delete('wishlist/remove/{productId}', 'removeFromWishlist')->name('wishlist.remove');
+    Route::get('countQuantity','countQuantity')->name('pages.countQuantity');
 });
 
 Route::controller(WebsiteProductController::class)->prefix('products')->group(function () {

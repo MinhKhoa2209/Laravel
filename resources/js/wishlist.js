@@ -11,6 +11,7 @@ function addToWishlist( productId) {
     .then(response => response.json())
     .then(data => {
         alert(data.message);
+        updateWishlistCounts(data.wishlistCount);
     })
     .catch(error => {
         console.error('Error:', error);
@@ -30,6 +31,7 @@ function removeFromWishlist(productId) {
     .then(response => response.json())
     .then(data => {
         alert(data.message);
+        updateWishlistCounts(data.wishlistCount);
         const productElement = document.getElementById(`product-${productId}`);
         if (productElement) {
             productElement.remove();
@@ -51,6 +53,17 @@ function removeFromWishlist(productId) {
     .catch(error => {
         console.error('Error:', error);
     });
+}
+
+function updateWishlistCounts(wishlistCount) {
+    const wishlistIconCount = document.querySelector('.wishlist-count');
+    if (wishlistCount > 0) {
+        wishlistIconCount.textContent = wishlistCount;
+        wishlistIconCount.style.display = 'inline-block';
+    } else {
+        wishlistIconCount.style.display = 'none';
+    }
+    console.log('a');
 }
 
 

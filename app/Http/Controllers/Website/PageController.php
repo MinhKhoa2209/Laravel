@@ -58,15 +58,16 @@ class PageController extends Controller
 
     public function wishlist()
     {
-        $userId = auth()->id();
+        $userId = auth()->check() ? auth()->id() : null;
         $wishlistItems = Wishlist::where('user_id', $userId)->with('product')->get();
         return view('website.pages.wishlist', compact('wishlistItems'));
     }
 
 
-    public function addToWishlist( $productId)
-    {
-        $wishlistItem = Wishlist::where('user_id', auth()->id())->where('product_id', $productId)->first();
+    public function addToWishlist($productId) {
+        $userId = auth()->check() ? auth()->id() : null;
+
+        $wishlistItem = Wishlist::where('user_id', $userId)->where('product_id', $productId)->first();
 
         if ($wishlistItem) {
             return response()->json(['message' => 'Product is already in your wishlist.'], 200);
@@ -74,23 +75,26 @@ class PageController extends Controller
 
         DB::beginTransaction();
         try {
-
             Wishlist::create([
-                'user_id' => auth()->id(),
+                'user_id' => $userId,
                 'product_id' => $productId,
             ]);
 
             DB::commit();
-            return response()->json(['message' => 'Product added to wishlist successfully!'], 201);
+            $wishlistCount = Wishlist::where('user_id', $userId)->count();
+
+            return response()->json(['message' => 'Product added to wishlist successfully!','wishlistCount' => $wishlistCount], 201);
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json(['error' => 'Failed to add product to wishlist. Please try again.'], 500);
         }
     }
 
+
     public function removeFromWishlist($productId)
     {
-        $wishlistItem = Wishlist::where('user_id', auth()->id())->where('product_id', $productId)->first();
+        $userId = auth()->check() ? auth()->id() : null;
+        $wishlistItem = Wishlist::where('user_id', $userId)->where('product_id', $productId)->first();
 
         if (!$wishlistItem) {
             return response()->json(['error' => 'Product not found in wishlist.'], 404);
@@ -101,7 +105,8 @@ class PageController extends Controller
             $wishlistItem->delete();
 
             DB::commit();
-            return response()->json(['message' => 'Product removed from wishlist successfully!'], 200);
+            $wishlistCount = Wishlist::where('user_id', $userId)->count();
+            return response()->json(['message' => 'Product removed from wishlist successfully!','wishlistCount' => $wishlistCount], 200);
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json(['error' => 'Failed to remove product from wishlist. Please try again.'], 500);
@@ -144,11 +149,13 @@ class PageController extends Controller
        $totalAmount = Cart::where('user_id', $userId)->sum('sub_amount');
        Cart::where('user_id', $userId)->update(['total_amount' => $totalAmount]);
 
+       $cartCount = Cart::where('user_id', $userId)->sum('quantity');
        return response()->json([
            'success' => true,
            'message' => 'Product added to cart!',
            'cart' => Cart::where('user_id', $userId)->with('product')->get(),
-           'totalAmount' => $totalAmount
+           'totalAmount' => $totalAmount,
+           'cartCount' => $cartCount,
        ]);
    }
 
@@ -159,11 +166,13 @@ class PageController extends Controller
         $cartItem->delete();
 
         $totalAmount = Cart::where('user_id', $userId)->sum('sub_amount');
+        $cartCount = Cart::where('user_id', $userId)->sum('quantity');
         return response()->json([
             'success' => true,
             'message' => 'Product removed from cart!',
             'cart' => Cart::where('user_id', $userId)->with('product')->get(),
-            'totalAmount' => $totalAmount
+            'totalAmount' => $totalAmount,
+            'cartCount' => $cartCount,
         ]);
     }
     public function updateCartQuantity(Request $request, $productId)
@@ -227,5 +236,10 @@ class PageController extends Controller
         return view('website.pages.checkout', compact('cartItems', 'user', 'checkDate', 'checkTime', 'orderNote'));
     }
 
-
+    public function countQuantity() {
+        $userId = auth()->check() ? auth()->id() : null;
+        $wishlistCount = Wishlist::where('user_id', $userId)->count();
+        $cartCount = Cart::where('user_id', $userId)->sum('quantity');
+        return view('website.layouts.homepage', compact('wishlistCount', 'cartCount'));
+    }
 }
