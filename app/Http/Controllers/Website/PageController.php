@@ -66,11 +66,10 @@ class PageController extends Controller
 
     public function addToWishlist($productId) {
         $userId = auth()->check() ? auth()->id() : null;
-
         $wishlistItem = Wishlist::where('user_id', $userId)->where('product_id', $productId)->first();
-
         if ($wishlistItem) {
-            return response()->json(['message' => 'Product is already in your wishlist.'], 200);
+            $wishlistCount = Wishlist::where('user_id', $userId)->count();
+            return response()->json(['message' => 'Product is already in your wishlist.','wishlistCount' => $wishlistCount], 200);
         }
 
         DB::beginTransaction();
@@ -115,7 +114,7 @@ class PageController extends Controller
 
     public function cart(Request $request)
     {
-        $userId = auth()->check() ? auth()->id() : 0;
+        $userId = auth()->check() ? auth()->id() : null;
         $cartItems = Cart::where('user_id', $userId)->with('product')->get();
         $totalPrice = $cartItems->sum('sub_amount');
         if ($request->wantsJson()) {
@@ -128,7 +127,7 @@ class PageController extends Controller
 
    public function addToCart(Request $request, $productId)
    {
-       $userId = auth()->check() ? auth()->id() : 0;
+       $userId = auth()->check() ? auth()->id() : null;
        $product = Product::findOrFail($productId);
        $quantity = $request->input('quantity');
        $cartItem = Cart::firstOrCreate(
@@ -161,7 +160,7 @@ class PageController extends Controller
 
     public function removeFromCart($productId)
     {
-        $userId = auth()->check() ? auth()->id() : 0;
+        $userId = auth()->check() ? auth()->id() :null;
         $cartItem = Cart::where('user_id', $userId)->where('product_id', $productId)->firstOrFail();
         $cartItem->delete();
 
@@ -177,26 +176,24 @@ class PageController extends Controller
     }
     public function updateCartQuantity(Request $request, $productId)
     {
-        $userId = auth()->check() ? auth()->id() : 0;
+        $userId = auth()->check() ? auth()->id() : null;
         $quantity = $request->input('quantity');
         $cartItem = Cart::where('user_id', $userId)->where('product_id', $productId)->firstOrFail();
         $cartItem->quantity = $quantity;
         $cartItem->sub_amount = $quantity * $cartItem->product->price;
         $cartItem->save();
-
         $totalAmount = Cart::where('user_id', $userId)->sum('sub_amount');
-
         Cart::where('user_id', $userId)->update(['total_amount' => $totalAmount]);
-
         $updatedCart = Cart::where('user_id', $userId)->with('product')->get();
-
+        $cartCount = Cart::where('user_id', $userId)->sum('quantity');
         return response()->json([
             'success' => true,
             'message' => 'Cart updated successfully!',
             'cart' => $updatedCart,
             'totalAmount' => $totalAmount,
             'productId' => $productId,
-            'subAmount' => $cartItem->sub_amount
+            'subAmount' => $cartItem->sub_amount,
+            'cartCount' => $cartCount,
         ]);
     }
 

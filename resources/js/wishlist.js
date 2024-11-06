@@ -60,8 +60,10 @@ function updateWishlistCounts(wishlistCount) {
     if (wishlistCount > 0) {
         wishlistIconCount.textContent = wishlistCount;
         wishlistIconCount.style.display = 'inline-block';
+        localStorage.setItem('wishlistCount', wishlistCount);
     } else {
         wishlistIconCount.style.display = 'none';
+        localStorage.removeItem('wishlistCount');
     }
     console.log('a');
 }

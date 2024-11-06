@@ -45,6 +45,7 @@ function buyNow(productId) {
     .then(data => {
         if (data.success) {
             updateCartDisplay(data.cart, data.totalAmount);
+            updateCartCounts( data.cartCount);
             window.location.href = '/pages/cart';
         } else {
             alert(data.message);
@@ -73,7 +74,6 @@ function removeFromCart(productId) {
             }
             updateCartDisplay(data.cart, data.totalAmount);
             updateCartCounts( data.cartCount);
-
         } else {
             alert(data.message, true);
         }
@@ -110,6 +110,7 @@ function updateCartQuantity(productId, change) {
     .then(data => {
         if (data.success) {
             updateCartDisplay(data.cart, data.totalAmount, data.productId, data.subAmount);
+            updateCartCounts( data.cartCount);
         } else {
             alert(data.message);
         }
@@ -130,7 +131,6 @@ function updateProductQuantity(productId, change) {
         alert("Requested quantity exceeds available stock.");
     }
     quantityInput.value = newQuantity;
-    console.log('Updated quantity:', newQuantity);
 }
 
 
@@ -193,8 +193,10 @@ function updateCartCounts( cartCount) {
     if (cartCount > 0) {
         cartIconCount.textContent = cartCount;
         cartIconCount.style.display = 'inline-block';
+        localStorage.setItem('cartCount', cartCount);
     } else {
         cartIconCount.style.display = 'none';
+        localStorage.removeItem('cartCount');
     }
 }
 
