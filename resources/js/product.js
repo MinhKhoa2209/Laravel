@@ -135,16 +135,17 @@ function updateProductQuantity(productId, change) {
 
 
 function updateCartDisplay(cart, totalAmount, productId, subAmount) {
+    const roundedSubAmount = Math.round(subAmount);
+    const roundedTotalAmount = Math.round(totalAmount);
 
     const productSubtotalElement = document.getElementById(`subtotal-${productId}`);
     if (productSubtotalElement) {
-        productSubtotalElement.textContent = subAmount.toLocaleString('vi-VN') + ' VND';
+        productSubtotalElement.textContent = roundedSubAmount.toLocaleString('vi-VN', { maximumFractionDigits: 0 }) + ' VND';
     }
     const totalAmountElement = document.getElementById('total-amount');
     if (totalAmountElement) {
-        totalAmountElement.textContent = totalAmount.toLocaleString('vi-VN') + ' VND';
+        totalAmountElement.textContent = roundedTotalAmount.toLocaleString('vi-VN', { maximumFractionDigits: 0 }) + ' VND';
     }
-
     cart.forEach(item => {
         const quantityElement = document.getElementById(`quantity-${item.product_id}`);
         if (quantityElement) {
@@ -153,10 +154,12 @@ function updateCartDisplay(cart, totalAmount, productId, subAmount) {
 
         const subtotalElement = document.getElementById(`subtotal-${item.product_id}`);
         if (subtotalElement) {
-            subtotalElement.textContent = (item.quantity * item.product.price).toLocaleString('vi-VN') + ' VND';
+            const itemSubtotal = Math.round(item.quantity * item.product.price);
+            subtotalElement.textContent = itemSubtotal.toLocaleString('vi-VN', { maximumFractionDigits: 0 }) + ' VND';
         }
     });
 }
+
 
 function filterProducts() {
     const priceFilters = document.querySelectorAll('.filter-price:checked');
