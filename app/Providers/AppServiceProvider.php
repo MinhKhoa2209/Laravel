@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\Facades\View;
 use App\Models\Wishlist;
 use App\Models\Cart;
+use App\Models\Category;
 use Illuminate\Support\ServiceProvider;
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,7 +17,9 @@ class AppServiceProvider extends ServiceProvider
             $wishlistCount = Wishlist::where('user_id', $userId)->count();
             $cartCount = Cart::where('user_id', $userId)->sum('quantity');
 
-            $view->with(compact('wishlistCount', 'cartCount'));
+            $categories = Category::withCount('products')->get();
+
+            $view->with(compact('wishlistCount', 'cartCount','categories'));
         });
     }
 
