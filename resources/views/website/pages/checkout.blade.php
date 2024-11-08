@@ -26,6 +26,25 @@
             @csrf
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                <section class="mb-8">
+                    <h2 class="text-xl font-semibold mb-4">Your Items</h2>
+                    <div class="bg-white p-6 rounded-lg shadow-lg border border-gray-200">
+                        @foreach($cartItems as $item)
+                            <div class="flex items-center border-b border-gray-300 py-4">
+                                <img src="{{ Storage::url($item->product->image) }}" alt="{{ $item->product->name }}" class="w-20 h-20 object-cover rounded-lg mr-6">
+                                <div class="flex-grow">
+                                    <h3 class="text-lg font-semibold">{{ $item->product->name }}</h3>
+                                    <p class="text-gray-600">Quantity: {{ $item->quantity }}</p>
+                                    <p class="text-gray-600">Price per item: {{ number_format($item->product->price, 0, ',', '.') }} VND</p>
+                                </div>
+                                <p class="text-blue-500 font-bold">{{ number_format($item->sub_amount, 0, ',', '.') }} VND</p>
+                            </div>
+                        @endforeach
+                    </div>
+                </section>
+
+                <div>
                 <section class="mb-8">
                     <h2 class="text-xl font-semibold mb-4">Delivery Information</h2>
                     <div class="bg-white p-6 rounded-lg shadow-lg border border-gray-200 grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -57,24 +76,6 @@
                     </div>
                 </section>
 
-                <section class="mb-8">
-                    <h2 class="text-xl font-semibold mb-4">Your Items</h2>
-                    <div class="bg-white p-6 rounded-lg shadow-lg border border-gray-200">
-                        @foreach($cartItems as $item)
-                            <div class="flex items-center border-b border-gray-300 py-4">
-                                <img src="{{ Storage::url($item->product->image) }}" alt="{{ $item->product->name }}" class="w-20 h-20 object-cover rounded-lg mr-6">
-                                <div class="flex-grow">
-                                    <h3 class="text-lg font-semibold">{{ $item->product->name }}</h3>
-                                    <p class="text-gray-600">Quantity: {{ $item->quantity }}</p>
-                                    <p class="text-gray-600">Price per item: {{ number_format($item->product->price, 0, ',', '.') }} VND</p>
-                                </div>
-                                <p class="text-blue-500 font-bold">{{ number_format($item->sub_amount, 0, ',', '.') }} VND</p>
-                            </div>
-                        @endforeach
-                    </div>
-                </section>
-            </div>
-
         <section class="mb-8">
             <div class="bg-white p-6 rounded-lg shadow-lg border border-gray-200">
                 <div class="mb-4">
@@ -89,15 +90,15 @@
                     <h3 class="text-xl font-bold">Total Price</h3>
                     <p class="text-2xl text-blue-500 font-bold">{{ number_format($cartItems->sum('sub_amount'), 0, ',', '.') }} VND</p> <!-- Updated for total amount -->
                 </div>
-
                 <input name="total_amount" type="hidden" value="{{ $cartItems->sum('sub_amount') }}">
-
                 <div class="flex space-x-4">
                     <a href="{{ route('pages.cart') }}" class="w-full bg-gray-200 text-black p-3 rounded-lg text-center hover:bg-gray-300">Back to Cart</a>
                     <button type="submit" class="w-full bg-black text-white p-3 rounded-lg hover:bg-gray-800">Place Order</button>
                 </div>
             </div>
         </section>
+                </div>
+            </div>
         </form>
     </div>
 </body>

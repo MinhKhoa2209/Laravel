@@ -18,7 +18,6 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
@@ -64,7 +63,7 @@
                     <div id="no-product-message" class="text-red-500 font-bold text-center my-4 mx-auto hidden">
                         No products found.
                     </div>
-                    
+
                     @if($all_products->isEmpty())
                     <div class="text-red-500 font-bold text-center my-4 flex-grow">
                         No products found.

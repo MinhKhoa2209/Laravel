@@ -10,14 +10,11 @@ use App\Http\Controllers\AdminPanel\OrderController;
 use App\Http\Controllers\AdminPanel\PaymentController;
 use App\Http\Controllers\Website\AuthController;
 use App\Http\Controllers\Website\CollectionController;
-use App\Http\Controllers\Website\DashboardController as WebsiteDashboardController;
+use App\Http\Controllers\Website\HomePageController;
 use App\Http\Controllers\Website\PageController;
 use App\Http\Controllers\Website\ProductController as WebsiteProductController;
 use App\Http\Controllers\Website\OrderController as WebsiteOrderController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 // Routes cho Admin
 Route::controller(AdminController::class)->prefix('admin')->group(function () {
@@ -86,7 +83,7 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 // Route cho Dashboard
-Route::get('/', [WebsiteDashboardController::class, 'index'])->name('homepage');
+Route::get('/', [HomePageController::class, 'index'])->name('homepage');
 
 // Routes cho Collections
 Route::controller(CollectionController::class)->prefix('collections')->group(function () {

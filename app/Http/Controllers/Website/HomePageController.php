@@ -5,7 +5,7 @@ use App\Models\Category;
 use App\Models\Product;
 
 
-class DashboardController extends Controller
+class HomePageController extends Controller
 {
     public function index()
     {
@@ -13,9 +13,7 @@ class DashboardController extends Controller
             $query->where('name', 'Spring summer clothes');
         })->take(8)->get();
 
-        $lego = Product::whereHas('category', function($query) {
-            $query->where('name', 'Lego');
-        })->take(4)->get();
+        $lego = Product::whereIn('id', [4, 6, 10, 12])->get();
 
         $categories = Category::withCount('products')->get();
 

@@ -51,10 +51,14 @@ class PageController extends Controller
     }
 
     public function checkOrder() {
-        $user = auth()->user();
-        $orders = Order::where('user_id', $user->id)->get();
-        return view('website.pages.order_tracking',compact('orders'));
+        if (!auth()->check()) {
+            return redirect()->route('login')->with('message', 'Please log in to view your order tracking.');
+        }
+        $userId = auth()->user()->id;
+        $orders = Order::where('user_id', $userId)->get();
+        return view('website.pages.order_tracking', compact('orders'));
     }
+
 
     public function wishlist()
     {

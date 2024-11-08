@@ -5,15 +5,15 @@
             <h3 class="text-lg font-bold mb-4">Contact</h3>
             <div class="flex items-center mb-2">
                 <i class="fas fa-map-marker-alt mr-2 text-gray-600"></i>
-                <strong>Address: </strong>Hoa Vang, Da Nang
+                <strong>Address: </strong> Hoa Vang, Da Nang
             </div>
             <div class="flex items-center mb-2">
                 <i class="fas fa-phone-alt mr-2 text-gray-600"></i>
-                <strong>Phone number: </strong>0905076967
+                <strong>Phone number: </strong> 0905076967
             </div>
             <div class="flex items-center">
                 <i class="fas fa-envelope mr-2 text-gray-600"></i>
-                <strong>Email: </strong>khoadm.23it@vku.udn.vn
+                <strong>Email: </strong> khoadm.23it@vku.udn.vn
             </div>
         </div>
 
@@ -23,7 +23,7 @@
             <ul>
                 <li><a href="/" class="hover:underline">Home Page</a></li>
                 <li><a href="{{route('pages.about')}}" class="hover:underline">Introduction</a></li>
-                <li><a href="#" class="hover:underline">Product</a></li>
+                <li><a href="{{route('collections.all-products')}}" class="hover:underline">Product</a></li>
                 <li><a href="{{route('pages.blog')}}" class="hover:underline">Blog</a></li>
                 <li><a href="{{route('pages.contact')}}" class="hover:underline">Contact</a></li>
                 <li><a href="{{route('pages.checkOrder')}}" class="hover:underline">Check Order</a></li>
