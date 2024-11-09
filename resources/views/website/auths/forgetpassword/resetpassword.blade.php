@@ -6,10 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>@yield('title')</title>
+    <title>Reset Password</title>
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
-    @vite('resources/js/wishlist.js')
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/kMVqHDzDBP1oWyP2IBLr9fHUnkixrjjgkGpDje+9edj76Pj2mWtGtsnL5JpG1QZUb+U1a1e3OrKbw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
@@ -28,10 +27,12 @@
                     <div class="bg-white border border-gray-200 rounded-lg shadow-lg">
                         <div class="p-8">
                             <div class="text-center">
-                                <h1 class="text-2xl font-bold text-gray-900 mb-4">WELCOME BACK!</h1>
+                                <h1 class="text-2xl font-bold text-gray-900 mb-4">Set New Password</h1>
+                                <p class="text-sm text-gray-600 mb-6">Please enter your email and a new password.</p>
                             </div>
-                            <form action="{{ route('login.action') }}" method="POST" class="space-y-4">
+                            <form action="{{ route('auth.SubmitResetPassword') }}" method="POST" class="space-y-4">
                                 @csrf
+                                <input type="hidden" name="token" value="{{ $token }}"> <!-- Token reset -->
                                 @if ($errors->any())
                                     <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
                                         <ul>
@@ -42,33 +43,21 @@
                                     </div>
                                 @endif
                                 <div class="form-group">
-                                    <input name="email" type="email" class="form-control form-control-user font-semibold w-full p-3 border border-gray-400 rounded" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address" required>
+                                    <input name="email" type="email" class="form-control font-semibold w-full p-3 border border-gray-400 rounded" placeholder="Enter your email address" value="{{ old('email') }}" required>
                                 </div>
                                 <div class="form-group">
-                                    <input name="password" type="password" class="form-control form-control-user font-semibold  w-full p-3 border border-gray-300 rounded" id="exampleInputPassword" placeholder="Password" required>
+                                    <input name="password" type="password" class="form-control font-semibold w-full p-3 border border-gray-400 rounded" placeholder="New Password" required>
                                 </div>
                                 <div class="form-group">
-                                    <div class="flex items-center mb-4">
-                                        <input type="checkbox" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" id="customCheck" name="remember">
-                                        <label class="ml-2 text-sm text-gray-600" for="customCheck">Remember Me</label>
-                                    </div>
+                                    <input name="password_confirmation" type="password" class="form-control font-semibold w-full p-3 border border-gray-400 rounded" placeholder="Confirm New Password" required>
                                 </div>
-                                <button type="submit" class="bg-black text-white font-bold py-2 rounded w-full">Login</button>
+                                <button type="submit" class="bg-blue-600 text-white font-bold py-2 rounded w-full">Reset Password</button>
                             </form>
-
-                            <hr class="my-4">
-                            <div class="text-center">
-                                <a class="text-sm text-blue-600 hover:underline" href="{{route('auth.forgetPassword')}}">Forgot Password?</a>
-                            </div>
-                            <div class="text-center">
-                                <a class="text-sm text-blue-600 hover:underline" href="{{ route('register') }}">Create an Account!</a>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
 
         <footer>
             @include('website.layouts.footer')

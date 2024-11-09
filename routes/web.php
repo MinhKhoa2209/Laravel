@@ -79,8 +79,14 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('register', 'registerSave')->name('register.save');
     Route::get('login', 'login')->name('login');
     Route::post('login', 'loginAction')->name('login.action');
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('/logout', 'logout')->name('logout');
+    Route::get('/forgot-password', 'ShowForgetPasswordForm')->name('auth.forgetPassword');
+    Route::post('/forgot-password', 'SubmitForgotPasswordForm')->name('auth.SubmitForgotPassword');
+    Route::get('/reset-password/{token}', 'ShowResetPasswordForm')->name('auth.ShowResetPassword');
+    Route::post('/reset-password' ,'SubmitResetPasswordForm')->name('auth.SubmitResetPassword');
+
 });
+
 
 // Route cho Dashboard
 Route::get('/', [HomePageController::class, 'index'])->name('homepage');
