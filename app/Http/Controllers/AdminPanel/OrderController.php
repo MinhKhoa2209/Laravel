@@ -37,17 +37,12 @@ class OrderController extends Controller
         $order = Order::findOrFail($id);
         $oldStatus = $order->status;
         $order->update($request->only('status'));
-
-        if ($request->status === 'shipped' && $oldStatus === 'pending') {
+        if ($order->status === 'canceled' && $oldStatus !== 'canceled') {
             foreach ($order->orderItems as $item) {
-                $item->product->decrement('quantity', $item->quantity);
+                $item->product->increment('quantity', $item->quantity);
             }
         }
-        if ($request->status === 'canceled' && $oldStatus !== 'canceled') {
-                foreach ($order->orderItems as $item) {
-                    $item->product->increment('quantity', $item->quantity);
-                }
-        }
+
         return redirect()->route('orders')->with('success', 'Order updated successfully');
     }
 

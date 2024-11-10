@@ -1,16 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Confirmation</title>
-    @vite('resources/css/app.css')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-</head>
-<body class="bg-white">
-    <div class="container mx-auto py-12 ">
-        <h1 class="text-3xl font-bold mb-8 text-center">Order Confirmation</h1>
+@extends('website.layouts.app')
+@section('title', 'Order Confirmation')
+@section('content')
 
+    <div class="container mx-auto pt-32 pb-20 ">
+        <h1 class="text-3xl font-bold mb-8 text-center">Order Confirmation</h1>
         <div class="bg-white p-6 rounded-lg shadow-lg border border-gray-200 text-center">
             <h2 class="text-xl font-semibold mb-4">Your order has been placed successfully!</h2>
             <p class="mb-4">Thank you for your purchase. We appreciate your business.</p>
@@ -25,5 +18,4 @@
             </div>
         </div>
     </div>
-</body>
-</html>
+@endsection

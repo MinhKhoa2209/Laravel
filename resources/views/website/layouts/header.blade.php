@@ -9,7 +9,9 @@
 
         <!-- Logo -->
         <div class="flex items-center justify-center lg:justify-start flex-grow overflow-hidden h-full">
+            <a href="/">
             <img src="{{ asset('admin_assets/img/images.jpg') }}" alt="Logo" class="h-32 w-auto object-cover object-top">
+            </a>
         </div>
 
         <!-- Navigation -->
@@ -118,6 +120,4 @@
 
         </div>
     </nav>
-
-
 </header>

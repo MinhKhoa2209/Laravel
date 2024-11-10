@@ -1,15 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('website.layouts.app')
+@section('title', 'Order Detail')
+@section('content')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Details</title>
-    @vite('resources/css/app.css')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-</head>
-
-<body class="bg-white">
     <div class="container mx-auto py-12">
         <h1 class="text-3xl font-bold mb-8 text-center">Order Details</h1>
 
@@ -26,7 +18,7 @@
                                 <h3 class="text-lg font-semibold">{{ $item->product->name }}</h3>
                                 <p class="text-gray-600">Quantity: {{ $item->quantity }}</p>
                                 <p class="text-gray-600">Price per item:
-                                    {{ number_format($item->product->price, 0, ',', '.') }} VND</p>
+                                    {{ number_format($item->product->price, 0, '.', '.') }} VND</p>
                             </div>
                             <p class="text-blue-500 font-bold">{{ number_format($item->sub_amount, 0, ',', '.') }} VND
                             </p>
@@ -79,7 +71,7 @@
                         <div class="flex justify-between items-center mb-4">
                             <h3 class="text-xl font-bold">Total Amount</h3>
                             <p class="text-2xl text-blue-500 font-bold">
-                                {{ number_format($order->total_amount, 0, ',', '.') }} VND</p>
+                                {{ number_format($order->total_amount, 0, '.', '.') }} VND</p>
                         </div>
                         <div class="flex justify-center">
                             <a href="{{ route('homepage') }}"
@@ -89,9 +81,5 @@
                 </section>
             </div>
         </div>
-
-
     </div>
-</body>
-
-</html>
+@endsection

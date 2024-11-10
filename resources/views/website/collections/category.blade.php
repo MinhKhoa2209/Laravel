@@ -1,35 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="{{ $categoryName }} Page">
-    <meta name="author" content="Your Name">
-    <title>{{ $categoryName }}</title>
-
-    <!-- CSS and JS -->
-    @vite('resources/css/app.css')
-    @vite('resources/js/app.js')
-    @vite('resources/js/wishlist.js')
-    @vite('resources/js/product.js')
-    @vite('resources/js/header.js')
-    @vite('resources/js/filterProduct.js')
-
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-</head>
-
-<body class="bg-gray-100">
-    <div class="min-h-screen flex flex-col justify-between">
-
-        <!-- Header -->
-        <header>
-            @include('website.layouts.header')
-        </header>
+@extends('website.layouts.app')
+@section('title', 'Category Products')
+@section('content')
 
         <!-- Main Content -->
         <main class="flex-grow py-28 bg-white">
@@ -73,7 +44,7 @@
                     <div id="no-product-message" class="text-red-500 font-bold text-center my-4 mx-auto hidden">
                         No products found.
                     </div>
-                    
+
                     @if($products->isEmpty())
                         <div class="text-red-500 font-bold text-center my-4 flex-grow">
                             No products found.
@@ -85,7 +56,7 @@
                                     <div class="bg-gray-100 p-4 rounded-lg text-center transition-transform duration-300 transform hover:scale-105 relative group min-h-[360px] flex flex-col">
                                         <img src="{{ Storage::url($product->image) }}" class="w-full h-auto object-cover mb-4 rounded">
                                         <h3 class="text-lg font-semibold">{{ $product->name }}</h3>
-                                        <p class="text-red-500 font-bold">{{ number_format($product->price, 0, '.', ',') }} VND</p>
+                                        <p class="text-red-500 font-bold">{{ number_format($product->price, 0, '.', '.') }} VND</p>
                                         <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                             <div class="bg-white rounded-lg shadow-md flex w-[60%] h-12">
                                                 <button type="button" class="text-black flex-1 bg-white rounded-l-lg hover:bg-black hover:text-white transition-colors duration-300 flex items-center justify-center h-full">
@@ -104,13 +75,4 @@
                 </div>
             </section>
         </main>
-
-        <!-- Footer -->
-        <footer>
-            @include('website.layouts.footer')
-        </footer>
-    </div>
-
-</body>
-
-</html>
+@endsection

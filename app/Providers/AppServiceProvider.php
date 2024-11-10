@@ -15,14 +15,10 @@ class AppServiceProvider extends ServiceProvider
             $userId = auth()->check() ? auth()->id() : null;
 
             $wishlistCount = Wishlist::where('user_id', $userId)->count();
-            $cartCount = Cart::where('user_id', $userId)->sum('quantity');
-
+            $cartCount = Cart::where('user_id', $userId)->count();;
             $categories = Category::withCount('products')->get();
-
             $view->with(compact('wishlistCount', 'cartCount','categories'));
         });
     }
-
-
 }
 

@@ -84,7 +84,6 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/forgot-password', 'SubmitForgotPasswordForm')->name('auth.SubmitForgotPassword');
     Route::get('/reset-password/{token}', 'ShowResetPasswordForm')->name('auth.ShowResetPassword');
     Route::post('/reset-password' ,'SubmitResetPasswordForm')->name('auth.SubmitResetPassword');
-
 });
 
 

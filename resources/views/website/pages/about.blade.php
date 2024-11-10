@@ -1,24 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>@yield('title')</title>
-    @vite('resources/css/app.css')
-    @vite('resources/js/header.js')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/kMVqHDzDBP1oWyP2IBLr9fHUnkixrjjgkGpDje+9edj76Pj2mWtGtsnL5JpG1QZUb+U1a1e3OrKbw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-
-<body class="bg-white">
-    <!-- Page Wrapper -->
-    <div class="min-h-screen flex flex-col justify-between">
-
-        <header>
-            @include('website.layouts.header')
-        </header>
+@extends('website.layouts.app')
+@section('title', 'Introduction')
+@section('content')
 
         <!-- Main Content -->
         <main class="flex-grow flex items-center pt-24">
@@ -39,14 +21,4 @@
                 <p class="text-lg mt-4">MixiShop is pleased to serve you!</p>
             </section>
         </main>
-
-        <!-- Footer (Included) -->
-        <footer>
-            @include('website.layouts.footer')
-        </footer>
-
-    </div>
-
-</body>
-
-</html>
+@endsection

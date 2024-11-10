@@ -68,12 +68,22 @@ function removeFromCart(productId) {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
+            updateCartDisplay(data.cart, data.totalAmount);
+            updateCartCounts(data.cartCount);
             const cartItem = document.getElementById(`cart-item-${productId}`);
             if (cartItem) {
                 cartItem.remove();
             }
-            updateCartDisplay(data.cart, data.totalAmount);
-            updateCartCounts( data.cartCount);
+            const cartContainer = document.querySelector('.cart-container');
+            if (cartContainer.children.length === 0) {
+                cartContainer.innerHTML = `
+                    <div class="col-span-full text-center p-4">
+                        <h2 class="text-lg font-semibold">Your cart is empty.</h2>
+                    </div>
+                `;
+            } else {
+                cartContainer.classList.remove('opacity-0');
+            }
         } else {
             alert(data.message, true);
         }
@@ -83,6 +93,7 @@ function removeFromCart(productId) {
         alert("An error occurred. Please try again.", true);
     });
 }
+
 
 function updateCartQuantity(productId, change) {
     const quantityInput = document.getElementById(`quantity-${productId}`);
@@ -123,7 +134,6 @@ function updateProductQuantity(productId, change) {
     let currentQuantity = parseInt(quantityInput.value);
     const maxQuantity = parseInt(quantityInput.getAttribute('data-max-quantity'));
     let newQuantity = currentQuantity + change;
-
     if (newQuantity < 1) {
         newQuantity = 1;
     } else if (newQuantity > maxQuantity) {
@@ -147,7 +157,7 @@ function updateCartDisplay(cart, totalAmount, productId, subAmount) {
         totalAmountElement.textContent = roundedTotalAmount.toLocaleString('vi-VN', { maximumFractionDigits: 0 }) + ' VND';
     }
     cart.forEach(item => {
-        const quantityElement = document.getElementById(`quantity-${item.product_id}`);
+        const quantityElement = document.getElementById(`quantity-cart-${item.product_id}`);
         if (quantityElement) {
             quantityElement.value = item.quantity;
         }
@@ -202,6 +212,8 @@ function updateCartCounts( cartCount) {
         localStorage.removeItem('cartCount');
     }
 }
+
+
 
 window.buyNow = buyNow;
 window.filterProducts = filterProducts;

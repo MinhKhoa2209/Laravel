@@ -1,28 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>@yield('title')</title>
-    @vite('resources/css/app.css')
-    @vite('resources/js/header.js')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/kMVqHDzDBP1oWyP2IBLr9fHUnkixrjjgkGpDje+9edj76Pj2mWtGtsnL5JpG1QZUb+U1a1e3OrKbw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-
-<body class="bg-gray-100">
-    <!-- Page Wrapper -->
-    <div class="min-h-screen flex flex-col justify-between">
-
-        <header>
-            @include('website.layouts.header')
-        </header>
+@extends('website.layouts.app')
+@section('title', 'Order Tracking')
+@section('content')
 
         <main class="flex-grow flex items-center justify-center pt-32 pb-24 bg-white">
             <section class="py-8 mx-auto max-w-5xl w-full">
-                <div class="p-6 border border-gray-400 rounded-lg shadow text-center">
+                <div class="p-6 rounded-lg text-center shadow-[10px_10px_30px_rgb(156,163,175)]">
 
                     <h3 class="text-xl font-bold mb-6">Your Order</h3>
                     <table class="w-full text-left border-collapse border border-gray-300">
@@ -68,6 +50,4 @@
         </footer>
 
     </div>
-</body>
-
-</html>
+@endsection

@@ -1,28 +1,26 @@
 <?php
-
-
 namespace App\Http\Controllers\Website;
 use App\Http\Controllers\Controller;
-use App\Models\Product;
-use App\Models\Category;
-
+use App\Services\ProductService;
 
 class CollectionController extends Controller
 {
+    protected $productService;
+    
+    public function __construct(ProductService $productService)
+    {
+        $this->productService = $productService;
+    }
 
     public function showAllProduct()
     {
-        $all_products = Product::all();
+        $all_products = $this->productService->getAllProducts();
         return view('website.collections.all-products', compact('all_products'));
     }
-
     public function showCategory($categoryName)
     {
         $categoryName = str_replace(['-', '_'], ' ', $categoryName);
-        $products = Product::whereHas('category', function($query) use ($categoryName) {
-            $query->where('name', $categoryName);
-        })->get();
-
+        $products = $this->productService->getProductsByCategoryName($categoryName);
         return view('website.collections.category', compact('products', 'categoryName'));
     }
 }

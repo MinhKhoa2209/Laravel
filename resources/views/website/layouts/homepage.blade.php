@@ -1,46 +1,155 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('website.layouts.app')
+@section('title', 'Home Page')
+@section('content')
+<main class="flex-grow">
+    <div class="flex-grow mt-24">
+        <!-- Banner 1 Section -->
+        <section class="bg-white">
+            <div class="relative flex items-center justify-center">
+                <img src="{{ asset('admin_assets/img/content/banner1.webp') }}" alt="Banner Image"
+                        class="h-53 w-85 object-cover" style="width: 85%; height: 53%; max-width: 100%;" />
+                </div>
+            </div>
+        </section>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="Your Name">
-    <title>Home Page</title>
+        <!-- Category Banner Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto text-center">
+                <h2 class="text-3xl font-bold mb-12">MIXI BRAND</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+                    @foreach ($categories as $category)
+                        <div class="group">
+                            <div
+                                class="w-full aspect-square rounded-full bg-gray-100 overflow-hidden transform transition-transform duration-300 group-hover:scale-110">
+                                <a
+                                    href="{{ route('collections.category', ['categoryName' => str_replace(' ', '-', $category->name)]) }}">
+                                    <img src="{{ Storage::url($category->image) }}" alt="{{ $category->name }}"
+                                        class="w-full h-auto object-cover">
+                                </a>
+                            </div>
+                            <h3 class="text-lg font-semibold mt-4">{{ $category->name }}</h3>
+                            <p class="text-gray-500">{{ $category->products_count }} products</p>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
 
-    <!-- CSS và JS -->
-    @vite('resources/css/app.css')
-    @vite('resources/js/app.js')
-    @vite('resources/js/wishlist.js')
-    @vite('resources/js/product.js')
-    @vite('resources/js/header.js')
-    @vite('resources/js/filterProduct.js')
+        <!-- Featured Products Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto">
+                <h2 class="text-3xl font-bold text-center mb-8">Featured Products</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    @foreach ($featuredProducts as $product)
+                        <a href="{{ route('products.detail', $product->id) }}" class="block">
+                            <div
+                                class="bg-gray-100 p-4 rounded-lg text-center transition-transform duration-300 transform hover:scale-105 relative group">
+                                <img src="{{ Storage::url($product->image) }}"
+                                    class="w-full h-auto object-cover mb-4 rounded">
+                                <h3 class="text-lg font-semibold">{{ $product->name }}</h3>
+                                <p class="text-red-500 font-bold">{{ number_format($product->price, 0, '.', '.') }} VND</p>
+                                <div
+                                    class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <div class="bg-white rounded-lg shadow-md flex w-[60%] h-[10%]">
+                                        <button type="button"
+                                            class="text-black flex-1 bg-white rounded-l-lg hover:bg-black hover:text-white transition-colors duration-300 flex items-center justify-center h-full">
+                                            <i class="fas fa-shopping-cart"></i>
+                                        </button>
+                                        <button type="button"
+                                            class="text-black flex-1 bg-white rounded-r-lg hover:bg-black hover:text-white transition-colors duration-300 flex items-center justify-center h-full"
+                                            onclick="addToWishlist({{ $product->id }})">
+                                            <i class="fas fa-heart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+        </section>
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-</head>
+        <!--Collections Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto">
+                <h2 class="text-3xl font-bold text-center mb-6">Collections</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    @foreach ($lego as $product)
+                        <a href="{{ route('products.detail', $product->id) }}" class="block">
+                            <div
+                                class="bg-gray-100 p-4 rounded-lg text-center transition-transform duration-300 transform hover:scale-105 relative group">
+                                <img src="{{ Storage::url($product->image) }}"
+                                    class="w-full h-auto object-cover mb-4 rounded">
+                                <h3 class="text-lg font-semibold">{{ $product->name }}</h3>
+                                <p class="text-red-500 font-bold">{{ number_format($product->price, 0, '.', '.') }} VND</p>
+                                <div
+                                    class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <div class="bg-white rounded-lg shadow-md flex w-[60%] h-[10%]">
+                                        <button type="button"
+                                            class="text-black flex-1 bg-white rounded-l-lg hover:bg-black hover:text-white transition-colors duration-300 flex items-center justify-center h-full">
+                                            <i class="fas fa-shopping-cart"></i>
+                                        </button>
+                                        <button type="button"
+                                            class="text-black flex-1 bg-white rounded-r-lg hover:bg-black hover:text-white transition-colors duration-300 flex items-center justify-center h-full"
+                                            onclick="addToWishlist({{ $product->id }})">
+                                            <i class="fas fa-heart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+        </section>
 
-<body class="bg-gray-100">
-    <!-- Page Wrapper -->
-    <div class="min-h-screen flex flex-col">
+        <!-- Banner 2 Section -->
+        <section class="py-16 bg-white ">
+            <div class="relative flex items-center justify-center">
+                <img src="{{ asset('admin_assets/img/content/banner2.jpg') }}" alt="Banner Image"
+                        class="h-53 w-85 object-cover" style="width: 85%; height: 53%; max-width: 100%;" />
+                </div>
+            </div>
+        </section>
 
-        <header>
-            @include('website.layouts.header')
-        </header>
+        <!-- Customer Reviews Section -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto">
+                <h2 class="text-3xl font-bold text-center mb-8">Customer Reviews</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    @foreach ($reviews as $review)
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <p class="italic">"{{ $review['content'] }}"</p>
+                            <div class="mt-4">
+                                <span class="font-semibold">{{ $review['author'] }}</span>
+                                <span class="text-gray-600"> - {{ $review['date'] }}</span>
+                                <div class="mt-2">
+                                    <span class="text-yellow-500">
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            @if ($i <= $review['rating'])
+                                                ★
+                                            @else
+                                                ☆
+                                            @endif
+                                        @endfor
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
 
-        <main class="flex-grow">
-            @include('website.layouts.content')
-        </main>
-
-        <footer>
-            @include('website.layouts.footer')
-        </footer>
-
+        <!-- Banner 3 Section -->
+        <section class="bg-white py-16">
+            <div class="relative flex items-center justify-center">
+                <img src="{{ asset('admin_assets/img/content/banner3.webp') }}" alt="Banner Image"
+                        class="h-53 w-85 object-cover" style="width: 85%; height: 53%; max-width: 100%;" />
+                </div>
+            </div>
+        </section>
     </div>
-
-</body>
-
-</html>
+</main>
+@endsection

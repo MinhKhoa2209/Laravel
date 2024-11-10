@@ -1,27 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout</title>
-    @vite('resources/css/app.css')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-</head>
-<body class="bg-white">
+@extends('website.layouts.app')
+@section('title', 'Check out')
+@section('content')
+
     <div class="container mx-auto py-12">
         <h1 class="text-3xl font-bold mb-8 text-center">Mixi Shop </h1>
-
-                @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
-
         <form action="{{ route('orders.placeOrder') }}" method="POST">
             @csrf
 
@@ -36,9 +18,9 @@
                                 <div class="flex-grow">
                                     <h3 class="text-lg font-semibold">{{ $item->product->name }}</h3>
                                     <p class="text-gray-600">Quantity: {{ $item->quantity }}</p>
-                                    <p class="text-gray-600">Price per item: {{ number_format($item->product->price, 0, ',', '.') }} VND</p>
+                                    <p class="text-gray-600">Price per item: {{ number_format($item->product->price, 0, '.', '.') }} VND</p>
                                 </div>
-                                <p class="text-blue-500 font-bold">{{ number_format($item->sub_amount, 0, ',', '.') }} VND</p>
+                                <p class="text-blue-500 font-bold">{{ number_format($item->sub_amount, 0, '.', '.') }} VND</p>
                             </div>
                         @endforeach
                     </div>
@@ -54,7 +36,8 @@
                         </div>
                         <div class="mb-4">
                             <label class="block font-semibold">Check Time:</label>
-                            <p>{{ $order->check_time ?? 'Not specified' }}</p>
+                            <p>{{ $checkTime ?? 'Not specified' }}</p>
+                            <input type="hidden" name="check_time" value="{{ $checkTime ?? '' }}">
                         </div>
                         <div class="mb-4">
                             <label class="block font-semibold">Phone:</label>
@@ -62,16 +45,17 @@
                         </div>
                         <div class="mb-4">
                             <label class="block font-semibold">Check Date:</label>
-                            <p>{{ $order->check_date ?? 'Not specified' }}</p>
+                            <p>{{ $checkDate ?? 'Not specified' }}</p>
+                            <input type="hidden" name="check_date" value="{{ $checkDate ?? '' }}">
                         </div>
-
                         <div class="mb-4">
                             <label class="block font-semibold">Address:</label>
                             <p>{{ $user->address }}</p>
                         </div>
                         <div class="mb-4">
                             <label class="block font-semibold">Order Notes:</label>
-                            <p>{{ $order->order_note ?? 'No notes' }}</p>
+                            <p>{{ $orderNote ?? 'No notes' }}</p>
+                            <input type="hidden" name="order_note" value="{{ $orderNote ?? '' }}">
                         </div>
                     </div>
                 </section>
@@ -88,7 +72,7 @@
                 </div>
                 <div class="flex justify-between items-center mb-4">
                     <h3 class="text-xl font-bold">Total Price</h3>
-                    <p class="text-2xl text-blue-500 font-bold">{{ number_format($cartItems->sum('sub_amount'), 0, ',', '.') }} VND</p> <!-- Updated for total amount -->
+                    <p class="text-2xl text-blue-500 font-bold">{{ number_format($cartItems->sum('sub_amount'), 0, '.', '.') }} VND</p>
                 </div>
                 <input name="total_amount" type="hidden" value="{{ $cartItems->sum('sub_amount') }}">
                 <div class="flex space-x-4">
@@ -101,5 +85,4 @@
             </div>
         </form>
     </div>
-</body>
-</html>
+@endsection

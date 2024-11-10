@@ -21,6 +21,8 @@ class Product extends Model
 
     const FOLDER = 'product';
 
+    const HOME_FEATURED = 8;
+
     public function category()
     {
         return $this->belongsTo(Category::class);

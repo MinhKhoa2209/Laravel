@@ -1,18 +1,26 @@
 <?php
 
 namespace App\Http\Controllers\Website;
-
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Order;
-use App\Models\Product;
 use App\Models\User;
 use App\Models\Wishlist;
+use App\Services\CartService;
+use App\Services\WishlistService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class PageController extends Controller
 {
+    protected $wishlistService;
+    protected $cartService;
+
+    public function __construct(WishlistService $wishlistService, CartService $cartService)
+    {
+        $this->wishlistService = $wishlistService;
+        $this->cartService = $cartService;
+    }
+
     public function about()
     {
         return view('website.pages.about');
@@ -63,142 +71,57 @@ class PageController extends Controller
     public function wishlist()
     {
         $userId = auth()->check() ? auth()->id() : null;
-        $wishlistItems = Wishlist::where('user_id', $userId)->with('product')->get();
+        $wishlistItems = $this->wishlistService->getWishlistItems($userId);
         return view('website.pages.wishlist', compact('wishlistItems'));
     }
 
-
-    public function addToWishlist($productId) {
+    public function addToWishlist($productId)
+    {
         $userId = auth()->check() ? auth()->id() : null;
-        $wishlistItem = Wishlist::where('user_id', $userId)->where('product_id', $productId)->first();
-        if ($wishlistItem) {
-            $wishlistCount = Wishlist::where('user_id', $userId)->count();
-            return response()->json(['message' => 'Product is already in your wishlist.','wishlistCount' => $wishlistCount], 200);
-        }
-
-        DB::beginTransaction();
-        try {
-            Wishlist::create([
-                'user_id' => $userId,
-                'product_id' => $productId,
-            ]);
-
-            DB::commit();
-            $wishlistCount = Wishlist::where('user_id', $userId)->count();
-
-            return response()->json(['message' => 'Product added to wishlist successfully!','wishlistCount' => $wishlistCount], 201);
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return response()->json(['error' => 'Failed to add product to wishlist. Please try again.'], 500);
-        }
+        $response = $this->wishlistService->addToWishlist($userId, $productId);
+        return response()->json($response);
     }
-
 
     public function removeFromWishlist($productId)
     {
         $userId = auth()->check() ? auth()->id() : null;
-        $wishlistItem = Wishlist::where('user_id', $userId)->where('product_id', $productId)->first();
-
-        if (!$wishlistItem) {
-            return response()->json(['error' => 'Product not found in wishlist.'], 404);
-        }
-
-        DB::beginTransaction();
-        try {
-            $wishlistItem->delete();
-
-            DB::commit();
-            $wishlistCount = Wishlist::where('user_id', $userId)->count();
-            return response()->json(['message' => 'Product removed from wishlist successfully!','wishlistCount' => $wishlistCount], 200);
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return response()->json(['error' => 'Failed to remove product from wishlist. Please try again.'], 500);
-        }
+        $response = $this->wishlistService->removeFromWishlist($userId, $productId);
+        return response()->json($response);
     }
 
     public function cart(Request $request)
     {
         $userId = auth()->check() ? auth()->id() : null;
-        $cartItems = Cart::where('user_id', $userId)->with('product')->get();
-        $totalPrice = $cartItems->sum('sub_amount');
+        $cartData = $this->cartService->getCartItems($userId);
+        $cartItems = $cartData['cartItems'];
+        $totalPrice = $cartData['totalPrice'];
         if ($request->wantsJson()) {
-            return response()->json(['cart' => $cartItems, 'totalPrice' => $totalPrice]);
+            return response()->json(['cart' => $cartItems,'totalPrice' => $totalPrice,]);
         }
-
         return view('website.pages.cart', compact('cartItems', 'totalPrice'));
     }
 
-
-   public function addToCart(Request $request, $productId)
-   {
-       $userId = auth()->check() ? auth()->id() : null;
-       $product = Product::findOrFail($productId);
-       $quantity = $request->input('quantity');
-       $cartItem = Cart::firstOrCreate(
-           ['user_id' => $userId, 'product_id' => $productId],
-           ['quantity' => 0, 'sub_amount' => 0]
-       );
-
-       $newQuantity = $cartItem->quantity + $quantity;
-
-       if ($newQuantity > $product->quantity) {
-           return response()->json(['success' => false, 'message' => "You can only buy up to {$product->quantity} items."], 400);
-       }
-
-       $cartItem->quantity = $newQuantity;
-       $cartItem->sub_amount = $newQuantity * $product->price;
-       $cartItem->save();
-
-       $totalAmount = Cart::where('user_id', $userId)->sum('sub_amount');
-       Cart::where('user_id', $userId)->update(['total_amount' => $totalAmount]);
-
-       $cartCount = Cart::where('user_id', $userId)->sum('quantity');
-       return response()->json([
-           'success' => true,
-           'message' => 'Product added to cart!',
-           'cart' => Cart::where('user_id', $userId)->with('product')->get(),
-           'totalAmount' => $totalAmount,
-           'cartCount' => $cartCount,
-       ]);
-   }
+    public function addToCart(Request $request, $productId)
+    {
+        $userId = auth()->check() ? auth()->id() : null;
+        $quantity = $request->input('quantity', 1);
+        $response = $this->cartService->addToCart($userId, $productId, $quantity);
+        return response()->json($response);
+    }
 
     public function removeFromCart($productId)
     {
-        $userId = auth()->check() ? auth()->id() :null;
-        $cartItem = Cart::where('user_id', $userId)->where('product_id', $productId)->firstOrFail();
-        $cartItem->delete();
-
-        $totalAmount = Cart::where('user_id', $userId)->sum('sub_amount');
-        $cartCount = Cart::where('user_id', $userId)->sum('quantity');
-        return response()->json([
-            'success' => true,
-            'message' => 'Product removed from cart!',
-            'cart' => Cart::where('user_id', $userId)->with('product')->get(),
-            'totalAmount' => $totalAmount,
-            'cartCount' => $cartCount,
-        ]);
+        $userId = auth()->check() ? auth()->id() : null;
+        $response = $this->cartService->removeFromCart($userId, $productId);
+        return response()->json($response);
     }
+
     public function updateCartQuantity(Request $request, $productId)
     {
         $userId = auth()->check() ? auth()->id() : null;
         $quantity = $request->input('quantity');
-        $cartItem = Cart::where('user_id', $userId)->where('product_id', $productId)->firstOrFail();
-        $cartItem->quantity = $quantity;
-        $cartItem->sub_amount = $quantity * $cartItem->product->price;
-        $cartItem->save();
-        $totalAmount = Cart::where('user_id', $userId)->sum('sub_amount');
-        Cart::where('user_id', $userId)->update(['total_amount' => $totalAmount]);
-        $updatedCart = Cart::where('user_id', $userId)->with('product')->get();
-        $cartCount = Cart::where('user_id', $userId)->sum('quantity');
-        return response()->json([
-            'success' => true,
-            'message' => 'Cart updated successfully!',
-            'cart' => $updatedCart,
-            'totalAmount' => $totalAmount,
-            'productId' => $productId,
-            'subAmount' => $cartItem->sub_amount,
-            'cartCount' => $cartCount,
-        ]);
+        $response = $this->cartService->updateCartQuantity($userId, $productId, $quantity);
+        return response()->json($response);
     }
 
     public function proceedToCheckout(Request $request)
