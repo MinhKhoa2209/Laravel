@@ -21,8 +21,7 @@
                         <div class="group">
                             <div
                                 class="w-full aspect-square rounded-full bg-gray-100 overflow-hidden transform transition-transform duration-300 group-hover:scale-110">
-                                <a
-                                    href="{{ route('collections.category', ['categoryName' => str_replace(' ', '-', $category->name)]) }}">
+                                <a href="{{ route('collections.category', ['categoryName' => str_replace(' ', '-', $category->name)]) }}">
                                     <img src="{{ Storage::url($category->image) }}" alt="{{ $category->name }}"
                                         class="w-full h-auto object-cover">
                                 </a>
