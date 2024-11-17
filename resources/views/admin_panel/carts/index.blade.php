@@ -25,7 +25,7 @@
             @if($cart->count() > 0)
                 @foreach($cart as $rs)
                     <tr>
-                        <td class="align-middle">{{ $rs->user_id }}</td>
+                        <td class="align-middle">{{ $rs->user_id ?? 'GUEST' }}</td>
                         <td class="align-middle">{{ $rs->product_id }}</td>
                         <td class="align-middle">{{ $rs->quantity }}</td>
                         <td class="align-middle">{{ number_format($rs->sub_amount, 2, '.', ',') }} VND</td>

@@ -6,9 +6,7 @@
         <h1 class="text-3xl font-bold mb-8 text-center">Mixi Shop </h1>
         <form action="{{ route('orders.placeOrder') }}" method="POST">
             @csrf
-
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-
                 <section class="mb-8">
                     <h2 class="text-xl font-semibold mb-4">Your Items</h2>
                     <div class="bg-white p-6 rounded-lg shadow-lg border border-gray-200">
@@ -66,7 +64,7 @@
                     <h3 class="text-xl font-bold pb-4">Select a Payment Method:</h3>
                     <select id="payment_method" name="payment_method" class="w-full p-2 border rounded-lg" required>
                         <option value="COD">Cash on Delivery (COD)</option>
-                        <option value="bank_transfer">Bank Transfer</option>
+                        <option value="bank_transfer" name = "bank_transfer">Bank Transfer</option>
                         <option value="mobile_payment">Mobile Payment</option>
                     </select>
                 </div>

@@ -2,7 +2,6 @@
 @section('title', 'Term Of Service')
 @section('content')
 
-        <!-- Main Content -->
         <main class="container mx-auto pt-32 pb-20 px-4 ">
             <h1 class="text-3xl font-bold mb-6">Terms of Service</h1>
 

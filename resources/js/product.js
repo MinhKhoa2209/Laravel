@@ -28,11 +28,6 @@ function addToCart(productId) {
 function buyNow(productId) {
     const quantityInput = document.getElementById(`quantity-${productId}`);
     const quantity = parseInt(quantityInput.value);
-    if (isNaN(quantity) || quantity < 1) {
-        alert("Please enter a valid quantity.");
-        return;
-    }
-
     fetch(`/pages/cart/add/${productId}`, {
         method: 'POST',
         headers: {
