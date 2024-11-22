@@ -71,7 +71,7 @@
                                         @enderror
                                     </div>
                                     <div class="col-sm-6">
-                                        <input name="password_confirmation" type="password" class="form-control form-control-user font-semibold w-full p-3 border border-gray-400 rounded" id="exampleRepeatPassword" placeholder="Repeat Password">
+                                        <input name="password_confirmation" type="password" class="form-control form-control-user font-semibold w-full p-3 border border-gray-400 rounded" id="exampleRepeatPassword" placeholder="Reenter Password">
                                     </div>
                                 </div>
                                 <button type="submit" class="bg-black text-white font-bold py-2 rounded w-full">Register </button>

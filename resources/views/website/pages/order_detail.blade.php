@@ -73,13 +73,40 @@
                             <p class="text-2xl text-blue-500 font-bold">
                                 {{ number_format($order->total_amount, 0, '.', '.') }} VND</p>
                         </div>
-                        <div class="flex justify-center">
+
+                        <div class="flex justify-center gap-4">
+                            @if ($order->status === 'pending')
+                                <form action="{{ route('orders.cancel', $order->id) }}" method="POST" class="w-full md:w-auto">
+                                    @csrf
+                                    @method('PATCH')
+                                    <button type="submit"
+                                        class="w-full bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
+                                        Cancel Order
+                                    </button>
+                                </form>
+                            @endif
                             <a href="{{ route('homepage') }}"
-                                class="w-[50%] bg-gray-200 text-black p-3 rounded-lg text-center hover:bg-gray-300">Back to Dashboard</a>
+                                class="w-full md:w-auto bg-gray-200 text-black px-4 py-2 rounded-lg text-center hover:bg-gray-300">
+                                Back to Dashboard
+                            </a>
                         </div>
                     </div>
                 </section>
             </div>
         </div>
+        <!-- Feedback Section -->
+        @if($order->status === 'delivered')
+        <section class="mb-8">
+            <h2 class="text-xl font-semibold mb-4">Feedback</h2>
+                <div class="bg-white p-6 rounded-lg shadow-lg border border-gray-200">
+                    <form action="{{ route('orders.feedback', $order->id) }}" method="POST">
+                        @csrf
+                        <textarea name="feedback" rows="4" class="w-full p-4 border border-gray-300 rounded-lg" placeholder="Share your feedback here...">{{ old('feedback', $order->feedback) }}</textarea>
+                        <button type="submit"  class="flex justify-center items-center w-[40%] mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 mx-auto">Submit Feedback</button>
+                    </form>
+                </div>
+            @endif
+        </section>
+
     </div>
 @endsection

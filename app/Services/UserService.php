@@ -63,7 +63,6 @@ class UserService
     public function sendPasswordResetLink(string $email)
     {
         Validator::make(['email' => $email], ['email' => 'required|email|exists:users'])->validate();
-
         $token = Str::random(64);
         DB::table('password_reset_tokens')->where('email', $email)->delete();
         DB::table('password_reset_tokens')->insert([
@@ -71,7 +70,6 @@ class UserService
             'token' => $token,
             'created_at' => Carbon::now(),
         ]);
-
         Mail::send('website.auths.forgetpassword.email', ['token' => $token], function ($message) use ($email) {
             $message->to($email)->subject('Forget Password Reset Link');
         });

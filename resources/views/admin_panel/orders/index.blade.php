@@ -21,6 +21,7 @@
                 <th>Check time</th>
                 <th>Check date</th>
                 <th>Order note</th>
+                <th>Feedback</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -37,7 +38,7 @@
                                 @method('PUT')
                                 <select name="status" class="form-select rounded" onchange="this.form.submit()">
                                     <option value="pending" {{ $rs->status == 'pending' ? 'selected' : '' }}>Pending</option>
-                                    <option value="shipped" {{ $rs->status == 'shipped' ? 'selected' : '' }}>Shipped</option>
+                                    <option value="shipping" {{ $rs->status == 'shipping' ? 'selected' : '' }}>Shipping</option>
                                     <option value="delivered" {{ $rs->status == 'delivered' ? 'selected' : '' }}>Delivered</option>
                                     <option value="canceled" {{ $rs->status == 'canceled' ? 'selected' : '' }}>Canceled</option>
                                 </select>
@@ -46,6 +47,7 @@
                         <td class="align-middle">{{ $rs->check_time }}</td>
                         <td class="align-middle">{{ $rs->check_date }}</td>
                         <td class="align-middle">{{ $rs->order_note }}</td>
+                        <td class="align-middle">{{ $rs->feedback }}</td>
                         <td class="align-middle">
                             <div class="btn-group d-flex" role="group" aria-label="Basic example" style="max-width: 150px;">
                                 <a href="{{ route('orders.show', $rs->id) }}" class="btn btn-secondary">Detail</a>

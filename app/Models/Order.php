@@ -14,12 +14,19 @@ class Order extends Model
         'status',
         'check_time',
         'check_date',
-        'order_note'
+        'order_note',
+        'feedback'
     ];
 
     public function orderItems()
     {
         return $this->hasMany(Order_item::class, 'order_id', 'id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 
 }

@@ -68,5 +68,22 @@ class OrderService
         ];
     }
 
+    public function showFeedback($userId)
+    {
+        $reviews = Order::whereIn('id', [1, 3, 30, 54])
+        ->whereNotNull('feedback')
+        ->with(['user'])
+        ->select('feedback', 'user_id', 'created_at')
+        ->get();
+        return $reviews->map(function($order) {
+            return [
+                'feedback' => $order->feedback,
+                'author' => $order->user ? $order->user->name : 'Unknown',
+                'date' => $order->created_at->format('F d, Y'),
+                'rating' => 5, 
+            ];
+        })->toArray();
+    }
+
 
 }

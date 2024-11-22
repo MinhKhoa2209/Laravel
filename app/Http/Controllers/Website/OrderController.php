@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Services\OrderService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class OrderController extends Controller
 {
@@ -39,8 +41,11 @@ class OrderController extends Controller
                 $vnp_HashSecret = "L0QXHO87S1X0TLZRNXUB9EZMI65KV0GY";
                 $vnp_Url = $this->generateVNPayUrl($order, $request->total_amount, $vnp_TmnCode, $vnp_HashSecret);
                 return redirect()->away($vnp_Url);
-            }
-        } catch (\Exception $e) {
+            } else if ($request->payment_method === 'mobile_payment') {
+                $momoUrl = $this->generateMomoPaymentUrl($order, $request->total_amount);
+                return redirect()->away($momoUrl);
+        }
+    } catch (\Exception $e) {
             return back()->withErrors(['error' => 'Đặt hàng thất bại. Vui lòng thử lại. ' . $e->getMessage()]);
         }
     }
@@ -51,9 +56,10 @@ class OrderController extends Controller
         if ($vnp_ResponseCode === '00') {
             return redirect()->route('orders.order_confirmation')->with('success', 'Thanh toán thành công!');
         } else {
-            return redirect()->route('orders.order_confirmation')->with('error', 'Thanh toán không thành công. Vui lòng thử lại.');
+            return redirect()->route('pages.checkout')->with('error', 'Thanh toán không thành công. Vui lòng thử lại.');
         }
     }
+
 
 
     private function generateVNPayUrl($order, $totalAmount, $vnp_TmnCode, $vnp_HashSecret)
@@ -125,6 +131,30 @@ class OrderController extends Controller
         $order = $orderDetails['order'];
         $payment = $orderDetails['payment'];
         return view('website.pages.order_detail', compact('user', 'order', 'payment'));
+    }
+
+    public function cancelOrder($order_id)
+    {
+        $order = Order::findOrFail($order_id);
+        $order->update(['status' => 'canceled']);
+        foreach ($order->orderItems as $item) {
+            $item->product->increment('quantity', $item->quantity);
+        }
+        return redirect()->route('pages.checkOrder')
+        ->with('success', 'Order has been successfully canceled.');
+    }
+
+    public function submitFeedback(Request $request, $orderId)
+    {
+        $order = Order::findOrFail($orderId);
+        $request->validate([
+            'feedback' => 'required|string|max:1000',
+        ]);
+     
+        $order->update([
+            'feedback' => $request->feedback
+        ]);
+        return redirect()->route('orders.order_detail', $orderId)->with('success', 'Thanks for your feedback');
     }
 
 }

@@ -65,7 +65,7 @@
                     <select id="payment_method" name="payment_method" class="w-full p-2 border rounded-lg" required>
                         <option value="COD">Cash on Delivery (COD)</option>
                         <option value="bank_transfer" name = "bank_transfer">Bank Transfer</option>
-                        <option value="mobile_payment">Mobile Payment</option>
+                        {{-- <option value="mobile_payment" name = "mobile_payment">Mobile Payment</option> --}}
                     </select>
                 </div>
                 <div class="flex justify-between items-center mb-4">

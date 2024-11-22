@@ -115,6 +115,8 @@ Route::controller(PageController::class)->prefix('pages')->group(function () {
     Route::post('wishlist/add/{productId}', 'addToWishlist')->name('wishlist.add');
     Route::delete('wishlist/remove/{productId}', 'removeFromWishlist')->name('wishlist.remove');
     Route::get('countQuantity','countQuantity')->name('pages.countQuantity');
+    Route::post('/momo-ipn', 'momoIpn')->name('payments.momo_ipn');
+
 });
 
 Route::controller(WebsiteProductController::class)->prefix('products')->group(function () {
@@ -126,4 +128,6 @@ Route::controller(WebsiteOrderController::class)->prefix('orders')->group(functi
     Route::post('placeOrder', 'placeOrder')->name('orders.placeOrder');
     Route::get('order_confirmation', 'orderConfirmation')->name('orders.order_confirmation');
     Route::get('order_detail/{orderId}', 'orderDetail')->name('orders.order_detail');
+    Route::patch('{order_id}/cancel', 'cancelOrder')->name('orders.cancel');
+    Route::post('{order_id}/feedback',  'submitFeedback')->name('orders.feedback');
 });

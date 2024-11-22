@@ -112,14 +112,13 @@
             </div>
         </section>
 
-        <!-- Customer Reviews Section -->
         <section class="py-16 bg-gray-50">
             <div class="container mx-auto">
                 <h2 class="text-3xl font-bold text-center mb-8">Customer Reviews</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    @foreach ($reviews as $review)
+                    @forelse ($reviews as $review)
                         <div class="bg-white p-6 rounded-lg shadow">
-                            <p class="italic">"{{ $review['content'] }}"</p>
+                            <p class="italic">"{{ $review['feedback'] }}"</p>
                             <div class="mt-4">
                                 <span class="font-semibold">{{ $review['author'] }}</span>
                                 <span class="text-gray-600"> - {{ $review['date'] }}</span>
@@ -136,10 +135,13 @@
                                 </div>
                             </div>
                         </div>
-                    @endforeach
+                    @empty
+                        <p class="text-center text-gray-500">No reviews available.</p>
+                    @endforelse
                 </div>
             </div>
         </section>
+
 
         <!-- Banner 3 Section -->
         <section class="bg-white py-16">
