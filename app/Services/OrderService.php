@@ -68,7 +68,7 @@ class OrderService
         ];
     }
 
-    public function showFeedback($userId)
+    public function showFeedback()
     {
         $reviews = Order::whereIn('id', [1, 3, 30, 54])
         ->whereNotNull('feedback')
@@ -80,7 +80,7 @@ class OrderService
                 'feedback' => $order->feedback,
                 'author' => $order->user ? $order->user->name : 'Unknown',
                 'date' => $order->created_at->format('F d, Y'),
-                'rating' => 5, 
+                'rating' => 5,
             ];
         })->toArray();
     }

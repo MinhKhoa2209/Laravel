@@ -31,7 +31,7 @@ class HomePageController extends Controller
         $featuredProducts = $this->productService->getListInHomePage(Product::HOME_FEATURED);
         $lego = $this->productService->getCollections();
         $categories = $this->categoryService->getList();
-        $reviews = $this->orderService->showFeedback(auth()->user()->id);
+        $reviews = $this->orderService->showFeedback();
 
         return view('website.layouts.homepage', compact('featuredProducts', 'lego', 'reviews' ,'categories'));
     }

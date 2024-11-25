@@ -23,13 +23,30 @@
                             @forelse ($orders as $order)
                                 <tr>
                                     <td class="border border-gray-300 px-4 py-2">{{ $order->id }}</td>
-                                    <td class="border border-gray-300 px-4 py-2">{{ $order->total_amount }}</td>
-                                    <td class="border border-gray-300 px-4 py-2">{{ $order->status }}</td>
+                                    <td class="border border-gray-300 px-4 py-2">{{ number_format($order->total_amount ,0, '.', '.') }} VND</td>
+                                    <td class="border border-gray-300 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
+                                        @php
+                                            $status = '';
+                                            if ($order->status == 'pending') {
+                                                $status = '<span class="bg-yellow-500 py-1 px-3 rounded text-black shadow">Processing</span>';
+                                            }
+                                            if ($order->status == 'shipped') {
+                                                $status = '<span class="bg-green-500 py-1 px-3 rounded text-black shadow">Shipped</span>';
+                                            }
+                                            if ($order->status == 'canceled') {
+                                                $status = '<span class="bg-red-500 py-1 px-3 rounded text-black shadow">Cancelled</span>';
+                                            }
+                                            if ($order->status == 'delivered') {
+                                                $status = '<span class="bg-green-500 py-1 px-3 rounded text-black shadow">Delivered</span>';
+                                            }
+                                        @endphp
+                                        {!! $status !!}
+                                    </td>
                                     <td class="border border-gray-300 px-4 py-2">{{ $order->check_time ?? 'null' }}</td>
                                     <td class="border border-gray-300 px-4 py-2">{{ $order->check_date ?? 'null' }}</td>
                                     <td class="border border-gray-300 px-4 py-2">{{ $order->order_note ?? 'null' }}</td>
                                     <td class="border border-gray-300 px-4 py-2 text-center">
-                                        <a href="{{ route('orders.order_detail', $order->id) }}" class="text-blue-500 hover:underline">
+                                        <a href="{{ route('orders.order_detail', $order->id) }}" class="bg-gray-100 py-1 px-3 rounded text-black shadow">
                                         View
                                         </a>
                                     </td>
@@ -45,9 +62,6 @@
             </section>
         </main>
 
-        <footer>
-            @include('website.layouts.footer')
-        </footer>
 
     </div>
 @endsection
