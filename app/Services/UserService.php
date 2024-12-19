@@ -93,6 +93,7 @@ class UserService
         $user = User::where('email', $data['email'])->firstOrFail();
         $user->update(['password' => Hash::make($data['password'])]);
         DB::table('password_reset_tokens')->where('email', $data['email'])->delete();
+        Auth::login($user);
         return $user;
     }
 

@@ -15,7 +15,7 @@
                     <strong>Phone number:</strong> 0905076967
                 </div>
                 <div class="text-lg mb-4">
-                    <strong>Email:</strong> <a href="mailto:khoadm.23it@vku.udn.vn" class="text-blue-600 underline">khoadm.23it@vku.udn.vn</a>
+                    <strong>Email:</strong> <a class="text-blue-600 underline">Mixishop@gmail.com</a>
                 </div>
             </div>
 

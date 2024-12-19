@@ -16,21 +16,21 @@
 
         <!-- Navigation -->
         <nav class="hidden lg:flex space-x-4 justify-center flex-grow flex-nowrap">
-            <a href="/" class="text-gray-700 hover:text-black text-lg hover:underline">Home Page</a>
-            <a href="{{ route('pages.about') }}" class="text-gray-700 hover:text-black text-lg hover:underline">Introduction</a>
+            <a href="/" class="block py-2 px-2 text-gray-700 text-lg hover:bg-gray-50 hover:underline hover:bg-transparent border-0 hover:text-cyan-700">Home Page</a>
+            <a href="{{ route('pages.about') }}" class="block py-2 px-2 text-gray-700 text-lg hover:bg-gray-50 hover:underline hover:bg-transparent border-0 hover:text-cyan-700">Introduction</a>
             <div class="relative group">
-                <a href="{{route('collections.all-products')}}" class="text-gray-700 hover:text-black text-lg hover:underline">Product
+                <a href="{{route('collections.all-products')}}" class="block py-2 px-2 text-gray-700 text-lg hover:bg-gray-50 hover:underline hover:bg-transparent border-0 hover:text-cyan-700">Product
                     <i class="fas fa-chevron-down ml-1"></i>
                 </a>
                 <div class="absolute left-0 hidden group-hover:block bg-white mt-0 shadow-lg rounded transition-all duration-200 z-30 min-w-[220px]">
                     @foreach ($categories as $category)
-                    <a href="{{ route('collections.category', ['categoryName' => str_replace(' ', '-', $category->name)]) }}" class="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100">{{ $category->name }}</a>
+                    <a href="{{ route('collections.category', ['categoryName' => str_replace(' ', '-', $category->name)]) }}" class="block px-4 py-2 hover:text-cyan-700 text-lg text-gray-700 hover:bg-gray-100">{{ $category->name }}</a>
                     @endforeach
                 </div>
             </div>
-            <a href="{{ route('pages.blog') }}" class="text-gray-700 hover:text-black text-lg hover:underline">Blog</a>
-            <a href="{{ route('pages.contact') }}" class="text-gray-700 hover:text-black text-lg hover:underline">Contact</a>
-            <a href="{{ route('pages.checkOrder') }}" class="text-gray-700 hover:text-black text-lg hover:underline">Check Order</a>
+            <a href="{{ route('pages.blog') }}" class="block py-2 px-2 text-gray-700 text-lg hover:bg-gray-50 hover:underline hover:bg-transparent border-0 hover:text-cyan-700">Blog</a>
+            <a href="{{ route('pages.contact') }}" class="block py-2 px-2 text-gray-700 text-lg hover:bg-gray-50 hover:underline hover:bg-transparent border-0 hover:text-cyan-700">Contact</a>
+            <a href="{{ route('pages.checkOrder') }}" class="block py-2 px-2 text-gray-700 text-lg hover:bg-gray-50 hover:underline hover:bg-transparent border-0 hover:text-cyan-700">Check Order</a>
         </nav>
 
         <!-- Icons -->
@@ -93,18 +93,17 @@
     <nav id="mobile-nav" class="lg:hidden hidden bg-white shadow-md z-50">
         <div class="container mx-auto px-4 py-2">
             <div id="main-menu" class="flex flex-col space-y-2 mt-2">
-                <a href="#" class="text-gray-700 hover:text-black">Home Page</a>
-                <a href="{{ route('pages.about') }}" class="text-gray-700 hover:text-black">Introduction</a>
-
-                <a href="{{ route('collections.all-products') }}" class="text-gray-700 hover:text-black">All Products</a>
-                <div class="flex justify-between items-center text-gray-700 hover:text-black cursor-pointer" onclick="showProductCategories()">
-                    Product
-                    <i class="fas fa-chevron-right ml-2"></i>
+                <a href="#" class="block text-gray-700 text-lg  hover:underline hover:bg-transparent border-0 hover:text-cyan-700">Home Page</a>
+                <a href="{{ route('pages.about') }}" class="block  text-gray-700 text-lg  hover:underline hover:bg-transparent border-0 hover:text-cyan-700">Introduction</a>
+                <div class="flex items-center text-gray-700 text-lg border-0 hover:text-cyan-700">
+                    <a href="{{ route('collections.all-products') }}" class="flex-grow hover:underline ">
+                        Product
+                    </a>
+                    <i class="fas fa-chevron-right ml-2 cursor-pointer" onclick="showProductCategories()"></i>
                 </div>
-
-                <a href="{{ route('pages.blog') }}" class="text-gray-700 hover:text-black">Blog</a>
-                <a href="{{ route('pages.contact') }}" class="text-gray-700 hover:text-black">Contact</a>
-                <a href="{{ route('pages.checkOrder') }}" class="text-gray-700 hover:text-black">Check Order</a>
+                <a href="{{ route('pages.blog') }}" class="block  text-gray-700 text-lg  hover:underline hover:bg-transparent border-0 hover:text-cyan-700">Blog</a>
+                <a href="{{ route('pages.contact') }}" class="block  text-gray-700 text-lg  hover:underline hover:bg-transparent border-0 hover:text-cyan-700">Contact</a>
+                <a href="{{ route('pages.checkOrder') }}" class="block  text-gray-700 text-lg  hover:underline hover:bg-transparent border-0 hover:text-cyan-700">Check Order</a>
             </div>
 
             <div id="product-categories" class="hidden space-y-2 mt-2">
@@ -112,7 +111,7 @@
                     <i class="fas fa-chevron-left mr-2"></i>
                 </div>
                 @foreach ($categories as $category)
-                    <a href="{{ route('collections.category', ['categoryName' => str_replace(' ', '-', $category->name)]) }}" class="text-gray-700 hover:text-black block">
+                    <a href="{{ route('collections.category', ['categoryName' => str_replace(' ', '-', $category->name)]) }}" class="block  text-gray-700 text-lg  hover:underline hover:bg-transparent border-0 hover:text-cyan-700">
                         {{ $category->name }}
                     </a>
                 @endforeach

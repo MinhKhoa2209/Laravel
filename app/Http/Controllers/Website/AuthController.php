@@ -61,6 +61,6 @@ class AuthController extends Controller
     public function submitResetPasswordForm(Request $request)
     {
         $this->userService->resetPassword($request->all());
-        return redirect()->route('login')->with('success', 'Your password has been reset successfully.');
+        return redirect()->route('homepage')->with('success', 'Your password has been reset successfully.');
     }
 }
