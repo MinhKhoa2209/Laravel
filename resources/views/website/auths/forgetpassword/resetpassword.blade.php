@@ -12,7 +12,7 @@
                             </div>
                             <form action="{{ route('auth.SubmitResetPassword') }}" method="POST" class="space-y-4">
                                 @csrf
-                                <input type="hidden" name="token" value="{{ $token }}"> <!-- Token reset -->
+                                <input type="hidden" name="token" value="{{ $token }}">
                                 @if ($errors->any())
                                     <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
                                         <ul>

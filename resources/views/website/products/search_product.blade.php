@@ -23,7 +23,7 @@
                                         <button type="button" class="text-black flex-1 bg-white rounded-l-lg hover:bg-black hover:text-white transition-colors duration-300 flex items-center justify-center h-full">
                                             <i class="fas fa-shopping-cart"></i>
                                         </button>
-                                        <button type="button" class="text-black flex-1 bg-white rounded-r-lg hover:bg-black hover:text-white transition-colors duration-300 flex items-center justify-center h-full" onclick="removeFromWishlist({{ $product->id }}, this)">
+                                        <button type="button" class="text-black flex-1 bg-white rounded-r-lg hover:bg-black hover:text-white transition-colors duration-300 flex items-center justify-center h-full" onclick="addToWishlist({{ $product->id }}, this)">
                                             <i class="fas fa-heart"></i>
                                         </button>
                                     </div>

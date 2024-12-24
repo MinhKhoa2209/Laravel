@@ -75,7 +75,7 @@
                         </div>
 
                         <div class="flex justify-center gap-4">
-                            @if ($order->status === 'pending')
+                            @if ($order->status === 'processing')
                                 <form action="{{ route('orders.cancel', $order->id) }}" method="POST" class="w-full md:w-auto">
                                     @csrf
                                     @method('PATCH')

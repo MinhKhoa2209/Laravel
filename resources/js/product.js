@@ -242,7 +242,6 @@ function updateCartCounts( cartCount) {
 }
 
 
-
 window.buyNow = buyNow;
 window.filterProducts = filterProducts;
 window.updateProductQuantity = updateProductQuantity;

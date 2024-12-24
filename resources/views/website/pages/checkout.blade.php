@@ -63,9 +63,8 @@
                 <div class="mb-4">
                     <h3 class="text-xl font-bold pb-4">Select a Payment Method:</h3>
                     <select id="payment_method" name="payment_method" class="w-full p-2 border rounded-lg" required>
-                        <option value="COD">Cash on Delivery (COD)</option>
-                        <option value="bank_transfer" name = "bank_transfer">Bank Transfer</option>
-                        {{-- <option value="mobile_payment" name = "mobile_payment">Mobile Payment</option> --}}
+                        <option value="Cash on Delivery (COD)">Cash on Delivery (COD)</option>
+                        <option value="VNPAY" name = "VNPAY">VNPAY</option>
                     </select>
                 </div>
                 <div class="flex justify-between items-center mb-4">

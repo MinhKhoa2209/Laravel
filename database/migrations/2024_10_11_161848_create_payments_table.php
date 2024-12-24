@@ -11,7 +11,7 @@ class CreatePaymentsTable extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('order_id')->nullable();
-            $table->enum('payment_method', ['COD', 'bank_transfer', 'mobile_payment']);
+            $table->enum('payment_method', ['Cash on Delivery (COD)', 'VNPAY']);
             $table->enum('payment_status', ['pending', 'completed', 'failed'])->default('pending');
             $table->timestamps();
         });

@@ -13,10 +13,10 @@
 
             <!-- Promotions Section -->
             <div class="mt-4 border-2 border-dashed border-blue-500 p-4 rounded-lg">
-                <h3 class="text-xl font-semibold text-blue-600">Promotions</h3>
+                <h3 class="text-xl font-semibold text-blue-600">Exclusive Benefits</h3>
                 <ul class="mt-2 text-sm text-gray-700 list-disc list-inside">
-                    <li>Free shipping on orders above 500k</li>
-                    <li>Flat shipping fee of 30k nationwide</li>
+                    <li>Customer Satisfaction Guarantee</li>
+                    <li>24/7 Customer Support</li>
                     <li>Support via official fanpage</li>
                     <li>Easy returns for defective items</li>
                 </ul>

@@ -21,25 +21,21 @@ class OrderController extends Controller
             'check_time' => 'nullable|string',
             'check_date' => 'nullable|date',
             'order_note' => 'nullable|string|max:500',
-            'payment_method' => 'required|string|in:COD,bank_transfer,mobile_payment',
+            'payment_method' => 'required|string|in:Cash on Delivery (COD),VNPAY',
             'total_amount' => 'required|numeric|min:0',
         ]);
 
         try {
-            // dd($request->check_date, $request->check_time, $request->order_note);
             $userId = auth()->id();
             $order = $this->orderService->placeOrder($userId, $request->all());
-            if ($request->payment_method === 'COD') {
+            if ($request->payment_method === 'Cash on Delivery (COD)') {
                 return redirect()->route('orders.order_confirmation')->with('success', 'Đặt hàng thành công!');
-            } elseif ($request->payment_method === 'bank_transfer') {
+            } elseif ($request->payment_method === 'VNPAY') {
                 $vnp_TmnCode = "NW99GKNJ";
                 $vnp_HashSecret = "L0QXHO87S1X0TLZRNXUB9EZMI65KV0GY";
                 $vnp_Url = $this->generateVNPayUrl($order, $request->total_amount, $vnp_TmnCode, $vnp_HashSecret);
                 return redirect()->away($vnp_Url);
-            } else if ($request->payment_method === 'mobile_payment') {
-                $momoUrl = $this->generateMomoPaymentUrl($order, $request->total_amount);
-                return redirect()->away($momoUrl);
-        }
+            }
     } catch (\Exception $e) {
             return back()->withErrors(['error' => 'Đặt hàng thất bại. Vui lòng thử lại. ' . $e->getMessage()]);
         }
