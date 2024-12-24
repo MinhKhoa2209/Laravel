@@ -12,7 +12,7 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->decimal('total_amount', 10, 2);
-            $table->enum('status', ['pending', 'shipped', 'delivered', 'canceled'])->default('pending');
+            $table->enum('status', ['processing','confirmation', 'shipped', 'delivered', 'canceled'])->default('processing');
             $table->timestamps();
         });
     }

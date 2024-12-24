@@ -41,6 +41,10 @@ class OrderController extends Controller
             foreach ($order->orderItems as $item) {
                 $item->product->increment('quantity', $item->quantity);
             }
+        } else if(($order->status === 'shipping' || $order->status === 'deliveried') && $oldStatus ==='processing') {
+            foreach ($order->orderItems as $item) {
+                $item->product->decrement('quantity', $item->quantity);
+            }
         }
 
         return redirect()->route('orders')->with('success', 'Order updated successfully');

@@ -16,6 +16,7 @@ class WishlistService
 
         if ($wishlistItem) {
             return [
+                'success' => false,
                 'message' => 'Product is already in your wishlist.',
                 'wishlistCount' => $this->getWishlistCount($userId),
             ];
@@ -26,12 +27,13 @@ class WishlistService
             Wishlist::create(['user_id' => $userId, 'product_id' => $productId]);
             DB::commit();
             return [
+                'success' => true,
                 'message' => 'Product added to wishlist successfully!',
                 'wishlistCount' => $this->getWishlistCount($userId),
             ];
         } catch (\Exception $e) {
             DB::rollBack();
-            return ['error' => 'Failed to add product to wishlist. Please try again.'];
+            return [ 'success' => false ,'error' => 'Failed to add product to wishlist. Please try again.'];
         }
     }
 

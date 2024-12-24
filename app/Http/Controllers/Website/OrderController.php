@@ -1,12 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\Website;
-
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Services\OrderService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 
 class OrderController extends Controller
 {
@@ -28,12 +26,9 @@ class OrderController extends Controller
         ]);
 
         try {
+            // dd($request->check_date, $request->check_time, $request->order_note);
             $userId = auth()->id();
             $order = $this->orderService->placeOrder($userId, $request->all());
-            foreach ($order->orderItems as $item) {
-                $item->product->decrement('quantity', $item->quantity);
-            }
-
             if ($request->payment_method === 'COD') {
                 return redirect()->route('orders.order_confirmation')->with('success', 'Đặt hàng thành công!');
             } elseif ($request->payment_method === 'bank_transfer') {
@@ -150,7 +145,7 @@ class OrderController extends Controller
         $request->validate([
             'feedback' => 'required|string|max:1000',
         ]);
-     
+
         $order->update([
             'feedback' => $request->feedback
         ]);

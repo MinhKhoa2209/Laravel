@@ -1,3 +1,35 @@
+import Swal from 'sweetalert2';
+function showSuccessMessage(title, message) {
+    Swal.fire({
+        icon: 'success',
+        title: title,
+        text: message,
+        showConfirmButton: false,
+        timer: 1000
+    });
+}
+
+function showErrorMessage(title, message) {
+    Swal.fire({
+        icon: 'error',
+        title: title,
+        text: message,
+        showConfirmButton: false,
+        timer: 1000
+    });
+}
+
+function showWarningMessage(title, message) {
+    Swal.fire({
+        icon: 'warning',
+        title: title,
+        text: message,
+        showConfirmButton: false,
+        timer: 1000
+    });
+}
+
+
 function addToCart(productId) {
     const quantityInput = document.getElementById(`quantity-${productId}`);
     const quantity = parseInt(quantityInput.value);
@@ -14,9 +46,9 @@ function addToCart(productId) {
         if (data.success) {
             updateCartDisplay(data.cart, data.totalAmount);
             updateCartCounts( data.cartCount);
-            alert(data.message);
+            showSuccessMessage('Added to cart',data.message);
         } else {
-            alert(data.message, true);
+            showErrorMessage('Added to cart',data.message, true);
         }
     })
     .catch(error => {
@@ -70,17 +102,18 @@ function removeFromCart(productId) {
                 cartItem.remove();
             }
             const cartContainer = document.querySelector('.cart-container');
-            if (cartContainer.children.length === 0) {
+            if (data.cart.length === 0) {
                 cartContainer.innerHTML = `
-                    <div class="col-span-full text-center p-4">
-                        <h2 class="text-lg font-semibold">Your cart is empty.</h2>
+                   <div class="col-span-full text-center p-4">
+                    <i class="fas fa-shopping-cart text-7xl text-gray-400 mb-4"></i>
+                    <h2 class="text-lg font-semibold">Your cart is empty.</h2>
                     </div>
                 `;
             } else {
                 cartContainer.classList.remove('opacity-0');
             }
         } else {
-            alert(data.message, true);
+            showErrorMessage(data.message, true);
         }
     })
     .catch(error => {
@@ -101,7 +134,7 @@ function updateCartQuantity(productId, change) {
     }
     else if (newQuantity > maxQuantity) {
     newQuantity = maxQuantity;
-    alert("Requested quantity exceeds available stock.");
+    showWarningMessage("Requested quantity exceeds available stock.");
     }
     quantityInput.value = newQuantity;
     fetch(`/pages/cart/update/${productId}`, {
@@ -133,7 +166,7 @@ function updateProductQuantity(productId, change) {
         newQuantity = 1;
     } else if (newQuantity > maxQuantity) {
         newQuantity = maxQuantity;
-        alert("Requested quantity exceeds available stock.");
+        showWarningMessage("Requested quantity exceeds available stock.");
     }
     quantityInput.value = newQuantity;
 }

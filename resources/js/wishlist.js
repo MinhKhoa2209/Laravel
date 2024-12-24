@@ -1,4 +1,27 @@
-function addToWishlist( productId) {
+import Swal from 'sweetalert2';
+
+function showSuccessMessage(title, message) {
+    Swal.fire({
+        icon: 'success',
+        title: title,
+        text: message,
+        showConfirmButton: false,
+        timer: 1000
+    });
+}
+
+
+function showErrorMessage(title, message) {
+    Swal.fire({
+        icon: 'error',
+        title: title,
+        text: message,
+        showConfirmButton: false,
+        timer: 1000
+    });
+}
+
+function addToWishlist(productId) {
     event.preventDefault();
     let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     fetch(`/pages/wishlist/add/${productId}`, {
@@ -10,10 +33,15 @@ function addToWishlist( productId) {
     })
     .then(response => response.json())
     .then(data => {
-        alert(data.message);
-        updateWishlistCounts(data.wishlistCount);
+        if (data.success) {
+            showSuccessMessage('Added to Wishlist', data.message);
+            updateWishlistCounts(data.wishlistCount);
+        } else {
+            showErrorMessage('Added to Wishlist', data.message );
+        }
     })
     .catch(error => {
+        showErrorMessage('Error', 'An error occurred. Please try again.');
         console.error('Error:', error);
     });
 }
@@ -30,8 +58,9 @@ function removeFromWishlist(productId) {
     })
     .then(response => response.json())
     .then(data => {
-        alert(data.message);
+        showSuccessMessage('Removed from Wishlist', data.message);
         updateWishlistCounts(data.wishlistCount);
+
         const productElement = document.getElementById(`product-${productId}`);
         if (productElement) {
             productElement.remove();
@@ -45,15 +74,16 @@ function removeFromWishlist(productId) {
                     </div>
                 `;
             } else {
-
                 wishlistContainer.classList.remove('opacity-0');
             }
         }
     })
     .catch(error => {
+        showErrorMessage('Error', 'An error occurred. Please try again.');
         console.error('Error:', error);
     });
 }
+
 
 function updateWishlistCounts(wishlistCount) {
     const wishlistIconCount = document.querySelector('.wishlist-count');
@@ -65,9 +95,8 @@ function updateWishlistCounts(wishlistCount) {
         wishlistIconCount.style.display = 'none';
         localStorage.removeItem('wishlistCount');
     }
-    console.log('a');
+    console.log('Wishlist count updated:', wishlistCount);
 }
-
 
 window.addToWishlist = addToWishlist;
 window.removeFromWishlist = removeFromWishlist;

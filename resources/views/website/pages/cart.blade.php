@@ -9,6 +9,7 @@
                     <div>
                         @if($cartItems->isEmpty())
                             <div class="col-span-full text-center p-4">
+                                <i class="fas fa-shopping-cart text-7xl text-gray-400 mb-4"></i>
                                 <h2 class="text-lg font-semibold">Your cart is empty.</h2>
                             </div>
                         @else

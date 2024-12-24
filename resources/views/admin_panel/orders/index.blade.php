@@ -37,7 +37,8 @@
                                 @csrf
                                 @method('PUT')
                                 <select name="status" class="form-select rounded" onchange="this.form.submit()">
-                                    <option value="pending" {{ $rs->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                                    <option value="processing" {{ $rs->status == 'processing' ? 'selected' : '' }}>Processing</option>
+                                    <option value="confirmation" {{ $rs->status == 'confirmation' ? 'selected' : '' }}>Confirmation</option>
                                     <option value="shipping" {{ $rs->status == 'shipping' ? 'selected' : '' }}>Shipping</option>
                                     <option value="delivered" {{ $rs->status == 'delivered' ? 'selected' : '' }}>Delivered</option>
                                     <option value="canceled" {{ $rs->status == 'canceled' ? 'selected' : '' }}>Canceled</option>

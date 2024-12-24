@@ -19,7 +19,7 @@ class OrderService
             $order = Order::create([
                 'user_id' => $userId,
                 'total_amount' => $data['total_amount'],
-                'status' => 'pending',
+                'status' => 'processing',
                 'check_time' => $data['check_time'] ?? null,
                 'check_date' => $data['check_date'] ?? null,
                 'order_note' => $data['order_note'] ?? null,

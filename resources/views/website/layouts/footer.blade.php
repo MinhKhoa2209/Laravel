@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 <footer class="bg-gray-800 text-white py-12">
-=======
->>>>>>> 1ae6e78fcddab39056dc5c157399cf8f09f83eba
 <div class="bg-gray-800">
     <div class="max-w-screen-lg px-4 sm:px-6 text-gray-800 sm:grid md:grid-cols-4 sm:grid-cols-2 mx-auto">
         <div class="p-5">
@@ -9,7 +6,7 @@
         </div>
         <div class="p-5">
             <div class="text-sm uppercase text-cyan-300 font-bold">Resources</div>
-<<<<<<< HEAD
+
             <a class="my-3 block text-white hover:bg-gray-200 hover:bg-transparent border-0 hover:text-gray-400 "
                 href="/#">Home Page <span class="text-teal-600 text-xs p-1"></span></a>
             <a class="my-3 block text-white hover:bg-gray-200 hover:bg-transparent border-0 hover:text-gray-400 "
@@ -22,26 +19,11 @@
             href="{{ route('pages.contact') }}">Contact</a>
             <a class="my-3 block text-white hover:bg-gray-200 hover:bg-transparent border-0 hover:text-gray-400 "
             href="{{ route('pages.checkOrder') }}">Check orders</a>
-=======
-            <a class="my-3 block text-white border-b border-gray-100 hover:bg-gray-200 lg:hover:bg-transparent lg:border-0 lg:hover:text-gray-400 lg:p-0 dark:text-gray-400 lg:dark:hover:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-300 lg:dark:hover:bg-transparent dark:border-gray-700 transition-all duration-300"
-                href="/#">Home <span class="text-teal-600 text-xs p-1"></span></a>
-            <a class="my-3 block text-white border-b border-gray-100 hover:bg-gray-200 lg:hover:bg-transparent lg:border-0 lg:hover:text-gray-400 lg:p-0 dark:text-gray-400 lg:dark:hover:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-300 lg:dark:hover:bg-transparent dark:border-gray-700 transition-all duration-300"
-                href="/#">Introduction<span class="text-teal-600 text-xs p-1"></span></a>
-            <a class="my-3 block text-white border-b border-gray-100 hover:bg-gray-200 lg:hover:bg-transparent lg:border-0 lg:hover:text-gray-400 lg:p-0 dark:text-gray-400 lg:dark:hover:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-300 lg:dark:hover:bg-transparent dark:border-gray-700 transition-all duration-300"
-                href="/#">Products <span class="text-teal-600 text-xs p-1">New</span></a>
-            <a class="my-3 block text-white border-b border-gray-100 hover:bg-gray-200 lg:hover:bg-transparent lg:border-0 lg:hover:text-gray-400 lg:p-0 dark:text-gray-400 lg:dark:hover:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-300 lg:dark:hover:bg-transparent dark:border-gray-700 transition-all duration-300"
-                href="/#">Blog</a>
-            <a class="my-3 block text-white border-b border-gray-100 hover:bg-gray-200 lg:hover:bg-transparent lg:border-0 lg:hover:text-gray-400 lg:p-0 dark:text-gray-400 lg:dark:hover:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-300 lg:dark:hover:bg-transparent dark:border-gray-700 transition-all duration-300"
-                href="/#">Contact</a>
-            <a class="my-3 block text-white border-b border-gray-100 hover:bg-gray-200 lg:hover:bg-transparent lg:border-0 lg:hover:text-gray-400 lg:p-0 dark:text-gray-400 lg:dark:hover:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-300 lg:dark:hover:bg-transparent dark:border-gray-700 transition-all duration-300"
-                href="/#">Check orders</a>
->>>>>>> 1ae6e78fcddab39056dc5c157399cf8f09f83eba
         </div>
 
 
         <div class="p-5">
             <div class="text-sm uppercase text-cyan-300 font-bold">Support</div>
-<<<<<<< HEAD
             <a class="my-3 block text-white hover:bg-gray-200 hover:bg-transparent border-0 hover:text-gray-400 "
             href="{{route('pages.privacy_policy')}}">Privacy Policy <span class="text-teal-600 text-xs p-1"></span></a>
             <a class="my-3 block text-white hover:bg-gray-200 hover:bg-transparent border-0 hover:text-gray-400 "
@@ -54,20 +36,6 @@
                 <span class="text-teal-600 text-xs p-1"></span>
             </span>
                 <a class="my-3 block text-white " >Mixishop@gmail.com
-=======
-            <a class="my-3 block text-white border-b border-gray-100 hover:bg-gray-200 lg:hover:bg-transparent lg:border-0 lg:hover:text-gray-400 lg:p-0 dark:text-gray-400 lg:dark:hover:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-300 lg:dark:hover:bg-transparent dark:border-gray-700 transition-all duration-300"
-                href="/#">Privacy Policy <span class="text-teal-600 text-xs p-1"></span></a><a
-                class="my-3 block text-white border-b border-gray-100 hover:bg-gray-200 lg:hover:bg-transparent lg:border-0 lg:hover:text-gray-400 lg:p-0 dark:text-gray-400 lg:dark:hover:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-300 lg:dark:hover:bg-transparent dark:border-gray-700 transition-all duration-300"
-                href="/#">Terms of Service <span class="text-teal-600 text-xs p-1"></span></a>
-        </div>
-        <div class="p-5">
-            <div class="text-sm uppercase text-cyan-300 font-bold">Contact us</div>
-            <span class="my-3 block text-white border-b border-gray-100  lg:border-0  lg:p-0 dark:text-gray-400"
-                href="/#">Hoa Vang, Da Nang
-                <span class="text-teal-600 text-xs p-1"></span>
-            </span>
-                <a class="my-3 block text-white border-b border-gray-100  lg:border-0  lg:p-0 dark:text-gray-400" href="/#">mixishop@gmail.com
->>>>>>> 1ae6e78fcddab39056dc5c157399cf8f09f83eba
             <span class="text-teal-600 text-xs p-1"></span></a>
         </div>
     </div>
@@ -98,11 +66,8 @@
                   0.771,-0.67 1.054,-1.093Z"></path>
                 </svg>
             </a>
-<<<<<<< HEAD
             <a href="https://www.facebook.com/profile.php?id=100076687362461" target="_blank" class="w-6 mx-1">
-=======
-            <a href="/#" class="w-6 mx-1">
->>>>>>> 1ae6e78fcddab39056dc5c157399cf8f09f83eba
+
                 <svg class="fill-current cursor-pointer text-gray-500 hover:text-cyan-600" width="100%" height="100%"
                     viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/"
@@ -114,11 +79,9 @@
                   -2.103,2.102l0,0.97l-0.969,0l0,1.617l0.969,0l0,4.689l1.941,0l0,-4.689Z"></path>
                 </svg>
             </a>
-<<<<<<< HEAD
+
             <a href="https://www.youtube.com/@MixiGaming3con" target="_blank" class="w-6 mx-1">
-=======
-            <a href="/#" class="w-6 mx-1">
->>>>>>> 1ae6e78fcddab39056dc5c157399cf8f09f83eba
+
                 <svg class="fill-current cursor-pointer text-gray-500 hover:text-cyan-600" width="100%" height="100%"
                     viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/"
@@ -142,51 +105,9 @@
                     </g>
                 </svg>
             </a>
-<<<<<<< HEAD
         </div>
         <div class="text-white mt-10">© Copyright 2024. All Rights Reserved.</div>
     </div>
 </div>
 </footer>
-=======
-            <a href="/#" class="w-6 mx-1">
-                <svg class="fill-current cursor-pointer text-gray-500 hover:text-cyan-600" width="100%" height="100%"
-                    viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/"
-                    style="fill-rule: evenodd; clip-rule: evenodd; stroke-linejoin: round; stroke-miterlimit: 2;">
-                    <path id="Shape" d="M7.3,0.9c1.5,-0.6 3.1,-0.9 4.7,-0.9c1.6,0 3.2,0.3 4.7,0.9c1.5,0.6 2.8,1.5
-                  3.8,2.6c1,1.1 1.9,2.3 2.6,3.8c0.7,1.5 0.9,3 0.9,4.7c0,1.7 -0.3,3.2
-                  -0.9,4.7c-0.6,1.5 -1.5,2.8 -2.6,3.8c-1.1,1 -2.3,1.9 -3.8,2.6c-1.5,0.7
-                  -3.1,0.9 -4.7,0.9c-1.6,0 -3.2,-0.3 -4.7,-0.9c-1.5,-0.6 -2.8,-1.5
-                  -3.8,-2.6c-1,-1.1 -1.9,-2.3 -2.6,-3.8c-0.7,-1.5 -0.9,-3.1 -0.9,-4.7c0,-1.6
-                  0.3,-3.2 0.9,-4.7c0.6,-1.5 1.5,-2.8 2.6,-3.8c1.1,-1 2.3,-1.9
-                  3.8,-2.6Zm-0.3,7.1c0.6,0 1.1,-0.2 1.5,-0.5c0.4,-0.3 0.5,-0.8 0.5,-1.3c0,-0.5
-                  -0.2,-0.9 -0.6,-1.2c-0.4,-0.3 -0.8,-0.5 -1.4,-0.5c-0.6,0 -1.1,0.2
-                  -1.4,0.5c-0.3,0.3 -0.6,0.7 -0.6,1.2c0,0.5 0.2,0.9 0.5,1.3c0.3,0.4 0.9,0.5
-                  1.5,0.5Zm1.5,10l0,-8.5l-3,0l0,8.5l3,0Zm11,0l0,-4.5c0,-1.4 -0.3,-2.5
-                  -0.9,-3.3c-0.6,-0.8 -1.5,-1.2 -2.6,-1.2c-0.6,0 -1.1,0.2 -1.5,0.5c-0.4,0.3
-                  -0.8,0.8 -0.9,1.3l-0.1,-1.3l-3,0l0.1,2l0,6.5l3,0l0,-4.5c0,-0.6 0.1,-1.1
-                  0.4,-1.5c0.3,-0.4 0.6,-0.5 1.1,-0.5c0.5,0 0.9,0.2 1.1,0.5c0.2,0.3 0.4,0.8
-                  0.4,1.5l0,4.5l2.9,0Z"></path>
-                </svg>
-            </a>
-            <a href="/#" class="w-6 mx-1">
-                <svg class="fill-current cursor-pointer text-gray-500 hover:text-cyan-600" width="100%" height="100%"
-                    viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/"
-                    style="fill-rule: evenodd; clip-rule: evenodd; stroke-linejoin: round; stroke-miterlimit: 2;">
-                    <path id="Combined-Shape" d="M12,24c6.627,0 12,-5.373 12,-12c0,-6.627 -5.373,-12 -12,-12c-6.627,0
-                  -12,5.373 -12,12c0,6.627 5.373,12 12,12Zm6.591,-15.556l-0.722,0c-0.189,0
-                  -0.681,0.208 -0.681,0.385l0,6.422c0,0.178 0.492,0.323
-                  0.681,0.323l0.722,0l0,1.426l-4.675,0l0,-1.426l0.935,0l0,-6.655l-0.163,0l-2.251,8.081l-1.742,0l-2.222,-8.081l-0.168,0l0,6.655l0.935,0l0,1.426l-3.74,0l0,-1.426l0.519,0c0.203,0
-                  0.416,-0.145 0.416,-0.323l0,-6.422c0,-0.177 -0.213,-0.385
-                  -0.416,-0.385l-0.519,0l0,-1.426l4.847,0l1.583,5.704l0.042,0l1.598,-5.704l5.021,0l0,1.426Z"></path>
-                </svg>
-            </a>
-        </div>
-        <div class="my-5">© Copyright 2024. All Rights Reserved.</div>
-    </div>
-</div>
 
-<!-- Credit: Componentity.com -->
->>>>>>> 1ae6e78fcddab39056dc5c157399cf8f09f83eba

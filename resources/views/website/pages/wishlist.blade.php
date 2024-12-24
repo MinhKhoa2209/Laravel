@@ -2,7 +2,8 @@
 @section('title', 'Wishlist')
 @section('content')
 
-        <main class="flex-grow flex items-center px-24 pt-40 pb-24 bg-white">
+    <h1 class="text-4xl font-bold mt-28 pl-64">Wishlist</h1>
+        <main class="flex-grow flex items-center px-24 pt-12 pb-24 bg-white">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-[75%] mx-auto gap-10 wishlist-container">
                 @if($wishlistItems->isEmpty())
                     <div class="col-span-full text-center p-4">
@@ -26,7 +27,7 @@
                                             <i class="fas fa-shopping-cart"></i>
                                         </button>
                                         <button type="button" class="text-black flex-1 bg-white rounded-r-lg hover:bg-black hover:text-white transition-colors duration-300 flex items-center justify-center h-full" onclick="removeFromWishlist({{ $item->product->id }})">
-                                            <i class="fas fa-heart"></i>
+                                            <i class="fas fa-heart-broken"></i>
                                         </button>
                                     </div>
                                 </div>

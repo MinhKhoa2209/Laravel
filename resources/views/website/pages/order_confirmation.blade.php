@@ -3,9 +3,11 @@
 @section('content')
 
     <div class="container mx-auto pt-32 pb-20 ">
-        <h1 class="text-3xl font-bold mb-8 text-center">Order Confirmation</h1>
+        <h1 class="text-3xl font-bold mb-8 text-center">Order Confirmation!</h1>
         <div class="bg-white p-6 rounded-lg shadow-lg border border-gray-200 text-center">
-            <h2 class="text-xl font-semibold mb-4">Your order has been placed successfully!</h2>
+            <h2 class="text-xl font-semibold mb-4">Your order has been placed successfully
+                <i class="fas fa-check-circle text-green-500 ml-2"></i>
+            </h2>
             <p class="mb-4">Thank you for your purchase. We appreciate your business.</p>
 
             <div class="flex justify-center space-x-4">

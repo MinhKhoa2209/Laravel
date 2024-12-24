@@ -1,9 +1,7 @@
 <?php
 namespace App\Http\Controllers\AdminPanel;
 use App\Http\Controllers\Controller;
-use App\Models\Order;
 use App\Models\Payment;
-use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller {
     public function index()

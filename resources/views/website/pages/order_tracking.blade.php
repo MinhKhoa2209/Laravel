@@ -27,10 +27,13 @@
                                     <td class="border border-gray-300 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
                                         @php
                                             $status = '';
-                                            if ($order->status == 'pending') {
+                                            if ($order->status == 'processing') {
                                                 $status = '<span class="bg-yellow-500 py-1 px-3 rounded text-black shadow">Processing</span>';
                                             }
-                                            if ($order->status == 'shipped') {
+                                            if ($order->status == 'confirmation') {
+                                                $status = '<span class="bg-orange-500 py-1 px-3 rounded text-black shadow">Confirmation</span>';
+                                            }
+                                            if ($order->status == 'shipping') {
                                                 $status = '<span class="bg-green-500 py-1 px-3 rounded text-black shadow">Shipped</span>';
                                             }
                                             if ($order->status == 'canceled') {

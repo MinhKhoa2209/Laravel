@@ -20,7 +20,6 @@ class PaymentController extends Controller
             'payment_status' => 'required|in:pending,completed,failed',
         ]);
         $payment->update($request->only('payment_status'));
-
         return redirect()->route('payments')->with('success', 'Payment updated successfully');
     }
 }

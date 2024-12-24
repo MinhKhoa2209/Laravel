@@ -32,15 +32,16 @@
 
     @yield('content')
     <div class="fixed right-4 bottom-8 space-y-4 z-50 flex flex-col items-center">
-        <button onclick="scrollToTop()" class="scroll-to-top bg-gray-200 p-4 rounded-full shadow-lg hover:bg-gray-400 transition w-12 h-12 flex items-center justify-center" style="display: none;">
+        <button onclick="scrollToTop()" class="scroll-to-top bg-gray-200 p-4 rounded-full shadow-lg hover:bg-gray-400 transition  w-12 h-12 flex items-center justify-center" style="display: none;">
             <i class="fas fa-arrow-up text-xl"></i>
         </button>
-        <button onclick="makeCall()" class="bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition w-12 h-12 flex items-center justify-center">
+        <button onclick="makeCall()" class="bg-green-500 text-white p-4 rounded-full shadow-lg transition transform scale-100 hover:scale-110  w-12 h-12 flex items-center justify-center">
             <i class="fas fa-phone text-xl"></i>
         </button>
-        <button onclick="openMessenger()" class="bg-blue-500 text-white p-4 rounded-full shadow-lg hover:bg-blue-600 transition w-12 h-12 flex items-center justify-center">
+        <button onclick="openMessenger()" class="bg-blue-500 text-white p-4 rounded-full shadow-lg transition transform scale-100 hover:scale-110  w-12 h-12 flex items-center justify-center">
             <i class="fab fa-facebook-messenger text-xl"></i>
         </button>
+
     </div>
 
     <footer>
